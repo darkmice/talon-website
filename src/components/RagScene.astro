@@ -1,0 +1,217 @@
+---
+import { getLocaleFromUrl, getTranslations } from '../i18n';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = getTranslations(locale);
+const rg = t.ragPage;
+const p = (path: string) => locale === 'zh' ? path : `/en${path}`;
+---
+
+<main class="flex-grow pt-32 pb-12 relative">
+  <div class="absolute inset-0 bg-grid-pattern cyber-grid opacity-30 pointer-events-none"></div>
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/5 blur-[120px] rounded-full pointer-events-none"></div>
+
+  <div class="container mx-auto px-4 max-w-7xl relative z-10">
+    <!-- Hero -->
+    <div class="text-center mb-16">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-lighter border border-white/10 text-accent text-xs font-semibold uppercase tracking-wider mb-4">
+        <span class="material-symbols-outlined text-[14px]">compare_arrows</span>
+        {rg.badge}
+      </div>
+      <h1 class="text-4xl md:text-5xl font-black text-white mb-4">
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-white to-purple-400">{rg.title}</span>
+      </h1>
+      <p class="text-slate-400 max-w-2xl mx-auto">{rg.subtitle}</p>
+    </div>
+
+    <div class="grid grid-cols-12 gap-8">
+      <!-- Left: Pipeline -->
+      <div class="col-span-12 lg:col-span-3 space-y-6">
+        <div class="bento-card p-6 rounded-2xl h-full flex flex-col relative overflow-hidden">
+          <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-slate-700 to-slate-800"></div>
+          <h3 class="text-lg font-bold text-white mb-6 flex items-center gap-2">
+            <span class="material-symbols-outlined text-slate-400">inventory_2</span>
+            {rg.pipeline.title}
+          </h3>
+          <!-- Step 1: Chunking -->
+          <div class="relative pl-6 pb-8 border-l border-white/10">
+            <div class="absolute -left-1.5 top-0 w-3 h-3 rounded-full bg-slate-800 border border-slate-600"></div>
+            <div class="bg-surface-lighter p-4 rounded-lg border border-white/5 mb-2">
+              <div class="flex justify-between items-center mb-2">
+                <span class="text-sm font-semibold text-white">{rg.pipeline.docInput}</span>
+                <span class="text-[10px] text-slate-500 font-mono">CHUNKING</span>
+              </div>
+              <div class="flex gap-1 mb-2">
+                <div class="h-1 flex-1 bg-slate-700 rounded-full"></div>
+                <div class="h-1 flex-1 bg-slate-700 rounded-full"></div>
+                <div class="h-1 flex-1 bg-slate-700 rounded-full"></div>
+              </div>
+            </div>
+          </div>
+          <!-- Step 2: Embedding -->
+          <div class="relative pl-6 pb-8 border-l border-white/10">
+            <div class="absolute -left-1.5 top-0 w-3 h-3 rounded-full bg-slate-800 border border-slate-600"></div>
+            <div class="bg-surface-lighter p-4 rounded-lg border border-white/5 mb-2 group hover:border-purple-500/30 transition-colors">
+              <div class="flex justify-between items-center mb-2">
+                <span class="text-sm font-semibold text-white group-hover:text-purple-400 transition-colors">{rg.pipeline.chunking}</span>
+                <span class="text-[10px] text-slate-500 font-mono">EMBEDDING</span>
+              </div>
+              <div class="grid grid-cols-8 gap-0.5 mb-2 opacity-50">
+                <div class="h-1 w-1 bg-purple-500 rounded-full"></div>
+                <div class="h-1 w-1 bg-purple-500 rounded-full"></div>
+                <div class="h-1 w-1 bg-slate-600 rounded-full"></div>
+                <div class="h-1 w-1 bg-purple-500 rounded-full"></div>
+                <div class="h-1 w-1 bg-slate-600 rounded-full"></div>
+                <div class="h-1 w-1 bg-slate-600 rounded-full"></div>
+                <div class="h-1 w-1 bg-purple-500 rounded-full"></div>
+                <div class="h-1 w-1 bg-slate-600 rounded-full"></div>
+              </div>
+              <p class="text-xs text-slate-500">{rg.pipeline.chunkModel}</p>
+            </div>
+          </div>
+          <!-- Step 3: Indexing -->
+          <div class="relative pl-6 border-l border-transparent">
+            <div class="absolute -left-1.5 top-0 w-3 h-3 rounded-full bg-slate-800 border border-slate-600"></div>
+            <div class="bg-surface-lighter p-4 rounded-lg border border-white/5 group hover:border-amber-500/30 transition-colors">
+              <div class="flex justify-between items-center mb-2">
+                <span class="text-sm font-semibold text-white group-hover:text-amber-400 transition-colors">{rg.pipeline.indexing}</span>
+                <span class="text-[10px] text-slate-500 font-mono">INDEXING</span>
+              </div>
+              <p class="text-xs text-slate-500">{rg.pipeline.indexDesc}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Search Flow -->
+      <div class="col-span-12 lg:col-span-9">
+        <div class="bento-card rounded-2xl p-8 relative overflow-hidden min-h-[600px] flex flex-col justify-between">
+          <!-- Query Bar -->
+          <div class="flex justify-center mb-12 relative z-20">
+            <div class="bg-surface-lighter border border-white/20 px-8 py-4 rounded-xl shadow-lg flex items-center gap-4 w-full max-w-md">
+              <span class="material-symbols-outlined text-white">search</span>
+              <div class="flex-1">
+                <div class="text-xs text-slate-500 uppercase font-mono mb-1">USER QUERY</div>
+                <div class="text-white font-mono text-sm">"Talon RAG 系统的延迟是多少？"</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dual Search -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-12 relative z-10 mb-12">
+            <!-- FTS -->
+            <div class="relative group">
+              <div class="bg-[#1a1814] border border-amber-500/20 p-6 rounded-xl relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-1 bg-amber-500/30"></div>
+                <div class="flex items-center gap-3 mb-4">
+                  <span class="material-symbols-outlined text-amber-400">find_in_page</span>
+                  <h4 class="text-amber-400 font-bold">{rg.fts.title}</h4>
+                </div>
+                <div class="space-y-3">
+                  <div class="flex items-center justify-between text-xs border-b border-white/5 pb-2">
+                    <span class="text-slate-400">Algorithm</span>
+                    <span class="text-white font-mono">{rg.fts.algo}</span>
+                  </div>
+                  <div class="flex items-center justify-between text-xs border-b border-white/5 pb-2">
+                    <span class="text-slate-400">Tokenizer</span>
+                    <span class="text-white font-mono">{rg.fts.tokenizer}</span>
+                  </div>
+                  <div class="flex items-center justify-between text-xs">
+                    <span class="text-slate-400">Feature</span>
+                    <span class="text-amber-400/80">{rg.fts.badge}</span>
+                  </div>
+                </div>
+                <div class="mt-4 p-3 bg-black/40 rounded border border-amber-500/10">
+                  <div class="flex gap-2 flex-wrap">
+                    <span class="text-[10px] text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">"Talon"</span>
+                    <span class="text-[10px] text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">"延迟"</span>
+                    <span class="text-[10px] text-slate-600 bg-slate-800/50 px-2 py-0.5 rounded">"是"</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Vector -->
+            <div class="relative group">
+              <div class="bg-[#16141c] border border-purple-500/20 p-6 rounded-xl relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-1 bg-purple-500/30"></div>
+                <div class="flex items-center gap-3 mb-4">
+                  <span class="material-symbols-outlined text-purple-400">hub</span>
+                  <h4 class="text-purple-400 font-bold">{rg.vector.title}</h4>
+                </div>
+                <div class="space-y-3">
+                  <div class="flex items-center justify-between text-xs border-b border-white/5 pb-2">
+                    <span class="text-slate-400">Index</span>
+                    <span class="text-white font-mono">HNSW / IVF</span>
+                  </div>
+                  <div class="flex items-center justify-between text-xs border-b border-white/5 pb-2">
+                    <span class="text-slate-400">Metric</span>
+                    <span class="text-white font-mono">{rg.vector.algo}</span>
+                  </div>
+                  <div class="flex items-center justify-between text-xs">
+                    <span class="text-slate-400">Feature</span>
+                    <span class="text-purple-400/80">{rg.vector.badge}</span>
+                  </div>
+                </div>
+                <div class="mt-4 p-3 bg-black/40 rounded border border-purple-500/10 flex items-center justify-center h-[34px]">
+                  <div class="w-full h-1 bg-slate-800 rounded-full overflow-hidden">
+                    <div class="h-full bg-purple-500 w-[85%] relative">
+                      <div class="absolute right-0 top-0 bottom-0 w-2 bg-white blur-[2px]"></div>
+                    </div>
+                  </div>
+                  <span class="text-[10px] text-purple-400 ml-2 font-mono">0.892</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- RRF Fusion -->
+          <div class="relative z-20 flex flex-col items-center">
+            <div class="bg-surface-lighter border border-primary/40 px-8 py-6 rounded-xl shadow-[0_0_30px_rgba(55,19,236,0.15)] w-full max-w-2xl relative overflow-hidden">
+              <div class="absolute inset-0 bg-primary/5"></div>
+              <div class="flex items-center justify-center gap-3 mb-4">
+                <span class="material-symbols-outlined text-primary">merge</span>
+                <h3 class="text-xl font-bold text-white">{rg.rrf.title}</h3>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-black/40 p-3 rounded border border-white/5 text-center">
+                  <div class="text-[10px] text-slate-500 uppercase mb-1">{rg.rrf.formula}</div>
+                  <div class="text-xs font-mono text-slate-300">{rg.rrf.desc}</div>
+                </div>
+                <div class="bg-black/40 p-3 rounded border border-white/5 text-center">
+                  <div class="text-[10px] text-slate-500 uppercase mb-1">Top K</div>
+                  <div class="text-xs font-mono text-slate-300">{rg.rrf.params}</div>
+                </div>
+                <div class="bg-black/40 p-3 rounded border border-white/5 text-center">
+                  <div class="text-[10px] text-slate-500 uppercase mb-1">Final Result</div>
+                  <div class="text-xs font-mono text-primary">{rg.rrf.output}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SQL Code Block -->
+        <div class="mt-6 bento-card p-0 rounded-xl overflow-hidden shadow-lg">
+          <div class="bg-[#1e1e24] px-4 py-2 flex items-center justify-between border-b border-white/5">
+            <div class="flex gap-2">
+              <div class="w-3 h-3 rounded-full bg-red-500/50"></div>
+              <div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
+              <div class="w-3 h-3 rounded-full bg-green-500/50"></div>
+            </div>
+            <span class="text-xs text-slate-500 font-mono">search_query.sql</span>
+          </div>
+          <div class="p-6 bg-[#0d0d12] overflow-x-auto">
+            <pre class="text-sm font-mono leading-relaxed"><code><span class="text-purple-400">SELECT</span> * <span class="text-purple-400">FROM</span> hybrid_search(
+    query_text =&gt; <span class="text-green-400">'Talon RAG 系统的延迟是多少？'</span>,
+    vector_col =&gt; <span class="text-blue-400">'embedding'</span>,
+    fts_col =&gt; <span class="text-blue-400">'content_tsvector'</span>,
+    limit_n =&gt; <span class="text-orange-400">10</span>,
+    rrf_k =&gt; <span class="text-orange-400">60</span>,
+    alpha =&gt; <span class="text-orange-400">0.5</span>  <span class="text-slate-500">-- balance keyword vs semantic weight</span>
+);</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

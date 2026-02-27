@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://talon.dev/sitemap-index.xml

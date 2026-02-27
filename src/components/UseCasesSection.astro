@@ -1,0 +1,146 @@
+---
+import { getLocaleFromUrl, getTranslations } from '../i18n';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = getTranslations(locale);
+const uc = t.useCasesPage;
+const p = (path: string) => locale === 'zh' ? path : `/en${path}`;
+---
+
+<section class="relative pt-32 pb-12 flex flex-col items-center justify-center overflow-hidden">
+  <div class="absolute inset-0 bg-grid-pattern cyber-grid opacity-20 pointer-events-none"></div>
+  <div class="absolute inset-0 bg-radial-glow pointer-events-none"></div>
+  <div class="relative z-10 container mx-auto px-4 flex flex-col items-center text-center gap-6 max-w-5xl">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-lighter border border-white/10 text-slate-300 text-xs font-semibold uppercase tracking-wider mb-2">
+      <span class="material-symbols-outlined text-[14px] text-accent">view_cozy</span>
+      {uc.badge}
+    </div>
+    <h1 class="text-4xl md:text-6xl lg:text-7xl font-black leading-tight tracking-tighter text-white">
+      {uc.title} <br class="hidden md:block" />
+      <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-accent text-glow">
+        {uc.titleHighlight}
+      </span>
+    </h1>
+    <p class="text-lg md:text-xl text-slate-400 max-w-2xl leading-relaxed">{uc.subtitle}</p>
+  </div>
+</section>
+
+<section class="py-16 bg-[#0d0d12] relative min-h-screen">
+  <div class="container mx-auto px-4 max-w-7xl">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[minmax(200px,auto)]">
+
+      <!-- Agent Long-Term Memory (Hero Card) -->
+      <a href={p('/use-cases/ai-memory')} class="md:col-span-2 md:row-span-1 bento-card rounded-3xl border border-primary/30 p-8 relative overflow-hidden group hover:border-primary/50 transition-colors" style="background: linear-gradient(145deg, rgba(55, 19, 236, 0.1) 0%, rgba(19, 17, 28, 0.95) 100%);">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-primary/20 blur-[80px] rounded-full pointer-events-none"></div>
+        <div class="flex flex-col md:flex-row justify-between md:items-start gap-6 relative z-10">
+          <div class="flex-1">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="p-2 bg-primary/20 rounded-lg border border-primary/30">
+                <span class="material-symbols-outlined text-white text-2xl">neurology</span>
+              </div>
+              <h3 class="text-2xl font-bold text-white">{uc.agentMemory.title}</h3>
+            </div>
+            <p class="text-slate-400 mb-6 text-sm leading-relaxed max-w-md">{uc.agentMemory.desc}</p>
+            <div class="flex flex-wrap gap-2">
+              {uc.agentMemory.tags.map((tag: string) => (
+                <span class="px-3 py-1 rounded-full bg-surface-lighter border border-white/5 text-xs text-slate-300">{tag}</span>
+              ))}
+            </div>
+          </div>
+          <div class="w-full md:w-48 shrink-0 bg-surface-dark/50 rounded-xl border border-white/10 p-4 backdrop-blur-sm">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs text-slate-500 uppercase tracking-wider">{uc.agentMemory.speedLabel}</span>
+              <span class="material-symbols-outlined text-green-400 text-xs">bolt</span>
+            </div>
+            <div class="text-3xl font-mono font-bold text-white mb-1">{uc.agentMemory.speedValue}<span class="text-sm text-slate-500 ml-1">ms</span></div>
+            <div class="h-1 w-full bg-slate-800 rounded-full mt-2 overflow-hidden">
+              <div class="h-full bg-gradient-to-r from-primary to-accent w-[95%]"></div>
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <!-- Enterprise RAG -->
+      <a href={p('/use-cases/rag')} class="md:col-span-1 md:row-span-1 bento-card rounded-3xl border border-purple-500/30 p-6 relative group overflow-hidden hover:border-purple-500/50 transition-colors">
+        <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-purple-600/10 blur-[40px] rounded-full pointer-events-none"></div>
+        <div class="flex items-center justify-between mb-4">
+          <span class="material-symbols-outlined text-purple-400 text-3xl">shield_with_house</span>
+          <span class="px-2 py-1 rounded bg-purple-500/10 text-purple-300 text-[10px] font-mono border border-purple-500/20">{uc.rag.badge}</span>
+        </div>
+        <h3 class="text-xl font-bold text-white mb-2">{uc.rag.title}</h3>
+        <p class="text-slate-400 text-xs mb-4">{uc.rag.desc}</p>
+        <div class="mt-auto border-t border-white/5 pt-4">
+          <div class="flex justify-between items-center text-xs">
+            <span class="text-slate-500">{uc.rag.recallLabel}</span>
+            <span class="text-white font-mono font-bold">{uc.rag.recallValue}</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- IoT Monitoring -->
+      <a href={p('/use-cases/iot')} class="md:col-span-1 md:row-span-1 bento-card rounded-3xl border border-pink-500/30 p-6 relative group overflow-hidden hover:border-pink-500/50 transition-colors">
+        <div class="flex items-center justify-between mb-4">
+          <span class="material-symbols-outlined text-pink-400 text-3xl">satellite_alt</span>
+          <div class="flex gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-pink-500 animate-pulse"></span>
+          </div>
+        </div>
+        <h3 class="text-xl font-bold text-white mb-2">{uc.iot.title}</h3>
+        <p class="text-slate-400 text-xs mb-4">{uc.iot.desc}</p>
+        <div class="mt-auto bg-surface-dark/50 rounded p-3 border border-white/5">
+          <div class="flex justify-between items-end">
+            <span class="text-[10px] text-slate-500 uppercase">{uc.iot.throughputLabel}</span>
+            <span class="text-pink-400 font-mono text-sm">{uc.iot.throughputValue}</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Knowledge Graph -->
+      <a href={p('/use-cases/knowledge-graph')} class="md:col-span-1 md:row-span-1 bento-card rounded-3xl border border-blue-500/30 p-6 relative group hover:border-blue-500/50 transition-colors">
+        <div class="flex items-center justify-between mb-4">
+          <span class="material-symbols-outlined text-blue-400 text-3xl">hub</span>
+          <span class="material-symbols-outlined text-slate-600 text-xl group-hover:text-blue-400 transition-colors">search</span>
+        </div>
+        <h3 class="text-xl font-bold text-white mb-2">{uc.graph.title}</h3>
+        <p class="text-slate-400 text-xs mb-4">{uc.graph.desc}</p>
+        <div class="mt-auto flex items-center gap-2">
+          <div class="h-1.5 w-1.5 rounded-full bg-blue-500"></div>
+          <span class="text-xs text-slate-300 font-mono">{uc.graph.latency}</span>
+        </div>
+      </a>
+
+      <!-- Fraud Detection -->
+      <a href={p('/use-cases/fraud-detection')} class="md:col-span-1 md:row-span-1 bento-card rounded-3xl border border-orange-500/30 p-6 relative group hover:border-orange-500/50 transition-colors">
+        <div class="flex items-center justify-between mb-4">
+          <span class="material-symbols-outlined text-orange-400 text-3xl">admin_panel_settings</span>
+          <span class="text-orange-500/50 text-xs font-mono">SECURE</span>
+        </div>
+        <h3 class="text-xl font-bold text-white mb-2">{uc.fraud.title}</h3>
+        <p class="text-slate-400 text-xs mb-4">{uc.fraud.desc}</p>
+        <div class="mt-auto grid grid-cols-2 gap-2">
+          <div class="text-center p-2 rounded bg-orange-500/10 border border-orange-500/20">
+            <span class="block text-white font-mono font-bold text-sm">{uc.fraud.latencyValue}</span>
+            <span class="text-[10px] text-orange-400/70">{uc.fraud.latencyLabel}</span>
+          </div>
+          <div class="text-center p-2 rounded bg-orange-500/10 border border-orange-500/20">
+            <span class="block text-white font-mono font-bold text-sm">{uc.fraud.tpsValue}</span>
+            <span class="text-[10px] text-orange-400/70">{uc.fraud.tpsLabel}</span>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- CTA -->
+    <div class="mt-16 flex flex-col items-center justify-center">
+      <a class="group relative inline-flex items-center justify-center px-8 py-4 font-bold text-white transition-all duration-200 bg-primary font-display rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary hover:bg-primary/90" href={p('/quickstart')}>
+        <span class="relative flex items-center gap-3">
+          {uc.cta}
+          <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+        </span>
+      </a>
+      <p class="mt-4 text-sm text-slate-500">
+        <a class="text-slate-300 hover:text-white underline decoration-slate-600 underline-offset-4" href={p('/platform')}>{uc.ctaSub}</a>
+      </p>
+    </div>
+  </div>
+</section>

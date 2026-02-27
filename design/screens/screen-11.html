@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html class="dark" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Talon 下载页 - 多平台支持</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#3713ec",
+                        secondary: "#7c3aed",
+                        accent: "#00f0ff",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#0a0a0f",
+                        "surface-dark": "#13111c",
+                        "surface-lighter": "#1c1a29",
+                    },
+                    fontFamily: {
+                        display: ["Space Grotesk", "sans-serif"],
+                        body: ["Space Grotesk", "sans-serif"],
+                    },
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(to right, #1f1d2e 1px, transparent 1px), linear-gradient(to bottom, #1f1d2e 1px, transparent 1px)",
+                        'radial-glow': "radial-gradient(circle at center, rgba(55, 19, 236, 0.15) 0%, rgba(10, 10, 15, 0) 70%)"
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'radar': 'radar 2s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        radar: {
+                            '0%': { width: '0%', height: '0%', opacity: '0.8' },
+                            '100%': { width: '200%', height: '200%', opacity: '0' },
+                        }
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .cyber-grid {
+            background-size: 40px 40px;
+            mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+        }
+        .text-glow {
+            text-shadow: 0 0 20px rgba(124, 58, 237, 0.5);
+        }
+        .bento-card {
+            background: linear-gradient(145deg, rgba(19, 17, 28, 0.6) 0%, rgba(19, 17, 28, 0.95) 100%);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        .bento-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px -10px rgba(55, 19, 236, 0.2);
+            border-color: rgba(55, 19, 236, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display overflow-x-hidden flex flex-col min-h-screen">
+<header class="fixed top-0 left-0 w-full z-50 border-b border-white/10 bg-background-dark/80 backdrop-blur-md">
+<div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 text-primary">
+<svg class="w-full h-full" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M24 4C25.7818 14.2173 33.7827 22.2182 44 24C33.7827 25.7818 25.7818 33.7827 24 44C22.2182 33.7827 14.2173 25.7818 4 24C14.2173 22.2182 22.2182 14.2173 24 4Z" fill="currentColor"></path>
+</svg>
+</div>
+<span class="text-xl font-bold tracking-tight text-white">Talon</span>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-sm font-medium text-slate-300 hover:text-white transition-colors" href="#">平台</a>
+<a class="text-sm font-medium text-slate-300 hover:text-white transition-colors" href="#">引擎</a>
+<a class="text-sm font-medium text-slate-300 hover:text-white transition-colors" href="#">价格</a>
+<a class="text-sm font-medium text-slate-300 hover:text-white transition-colors" href="#">文档</a>
+</nav>
+<div class="flex items-center gap-3">
+<button class="hidden sm:flex h-9 items-center px-4 rounded-lg bg-surface-lighter border border-white/10 text-sm font-medium text-white hover:bg-white/5 transition-colors">
+                登录
+            </button>
+<button class="h-9 items-center px-4 rounded-lg bg-primary hover:bg-primary/90 text-sm font-medium text-white shadow-[0_0_15px_rgba(55,19,236,0.5)] transition-all">
+                开始构建
+            </button>
+</div>
+</div>
+</header>
+<main class="flex-grow pt-24 pb-12 relative">
+<div class="absolute inset-0 bg-grid-pattern cyber-grid opacity-20 pointer-events-none"></div>
+<div class="absolute inset-0 bg-radial-glow pointer-events-none"></div>
+<div class="relative z-10 container mx-auto px-4 max-w-7xl">
+<div class="flex flex-col items-center text-center mb-16 space-y-4">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-lighter border border-white/10 text-slate-400 text-xs font-mono mb-2">
+<span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                v0.1.0 稳定版 (Latest)
+            </div>
+<h1 class="text-5xl md:text-6xl font-black text-white tracking-tight">
+                获取 <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Talon</span>
+</h1>
+<p class="text-lg md:text-xl text-slate-400 max-w-2xl leading-relaxed">
+                一个二进制文件，无限可能。零依赖部署，数据主权完全掌控。
+            </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto mb-16">
+<div class="bento-card rounded-3xl p-8 border border-white/5 flex flex-col h-full group">
+<div class="mb-6 flex justify-between items-start">
+<div class="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center border border-white/10">
+<span class="material-symbols-outlined text-3xl text-white">laptop_mac</span>
+</div>
+<span class="px-2 py-1 rounded bg-slate-800/50 text-slate-400 text-xs font-mono border border-white/10">UNIX</span>
+</div>
+<h3 class="text-2xl font-bold text-white mb-4">macOS</h3>
+<div class="space-y-4 mb-8 flex-grow">
+<div>
+<div class="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-2">架构</div>
+<div class="flex gap-2">
+<span class="px-3 py-1.5 rounded-md bg-surface-lighter border border-white/10 text-sm text-slate-300 font-mono">Apple Silicon (M1/M2/M3)</span>
+<span class="px-3 py-1.5 rounded-md bg-surface-lighter border border-white/10 text-sm text-slate-300 font-mono">Intel</span>
+</div>
+</div>
+<div>
+<div class="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-2">格式</div>
+<div class="flex gap-2 text-sm text-slate-400">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">terminal</span> Binary</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">package</span> Homebrew</span>
+</div>
+</div>
+</div>
+<button class="w-full h-12 rounded-lg bg-white text-background-dark font-bold hover:bg-slate-200 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all flex items-center justify-center gap-2 group-hover:scale-[1.02]">
+<span class="material-symbols-outlined">download</span>
+                    下载 .zip
+                </button>
+<div class="mt-4 text-center">
+<code class="text-xs text-slate-500 font-mono bg-black/30 px-2 py-1 rounded">brew install talon-data</code>
+</div>
+</div>
+<div class="bento-card rounded-3xl p-8 border border-white/5 flex flex-col h-full group relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/20 blur-[60px] rounded-full pointer-events-none"></div>
+<div class="mb-6 flex justify-between items-start relative z-10">
+<div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center border border-primary/20">
+<span class="material-symbols-outlined text-3xl text-white">terminal</span>
+</div>
+<span class="px-2 py-1 rounded bg-primary/20 text-primary text-xs font-mono border border-primary/20">RECOMMENDED</span>
+</div>
+<h3 class="text-2xl font-bold text-white mb-4 relative z-10">Linux</h3>
+<div class="space-y-4 mb-8 flex-grow relative z-10">
+<div>
+<div class="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-2">架构</div>
+<div class="flex gap-2">
+<span class="px-3 py-1.5 rounded-md bg-surface-lighter border border-white/10 text-sm text-slate-300 font-mono">x86_64</span>
+<span class="px-3 py-1.5 rounded-md bg-surface-lighter border border-white/10 text-sm text-slate-300 font-mono">AArch64</span>
+</div>
+</div>
+<div>
+<div class="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-2">格式</div>
+<div class="flex gap-2 text-sm text-slate-400">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">terminal</span> Binary</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">widgets</span> AppImage</span>
+</div>
+</div>
+</div>
+<button class="w-full h-12 rounded-lg bg-primary text-white font-bold hover:bg-primary/90 hover:shadow-[0_0_20px_rgba(55,19,236,0.5)] transition-all flex items-center justify-center gap-2 relative z-10 group-hover:scale-[1.02]">
+<span class="material-symbols-outlined">download</span>
+                    下载 .tar.gz
+                </button>
+<div class="mt-4 text-center relative z-10">
+<code class="text-xs text-slate-400 font-mono bg-black/30 px-2 py-1 rounded select-all cursor-pointer hover:text-white transition-colors">curl -sfL https://talon.sh/install | sh</code>
+</div>
+</div>
+<div class="bento-card rounded-3xl p-8 border border-white/5 flex flex-col h-full group">
+<div class="mb-6 flex justify-between items-start">
+<div class="w-14 h-14 rounded-2xl bg-blue-500/10 flex items-center justify-center border border-blue-500/20">
+<span class="material-symbols-outlined text-3xl text-white">grid_view</span>
+</div>
+<span class="px-2 py-1 rounded bg-blue-900/30 text-blue-300 text-xs font-mono border border-blue-500/30">WIN32</span>
+</div>
+<h3 class="text-2xl font-bold text-white mb-4">Windows</h3>
+<div class="space-y-4 mb-8 flex-grow">
+<div>
+<div class="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-2">架构</div>
+<div class="flex gap-2">
+<span class="px-3 py-1.5 rounded-md bg-surface-lighter border border-white/10 text-sm text-slate-300 font-mono">x64 (AMD64)</span>
+</div>
+</div>
+<div>
+<div class="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-2">格式</div>
+<div class="flex gap-2 text-sm text-slate-400">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">check_box_outline_blank</span> .exe Installer</span>
+</div>
+</div>
+</div>
+<button class="w-full h-12 rounded-lg bg-surface-lighter border border-white/20 text-white font-bold hover:bg-white/10 hover:border-white/40 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] transition-all flex items-center justify-center gap-2 group-hover:scale-[1.02]">
+<span class="material-symbols-outlined">download</span>
+                    下载 .exe
+                </button>
+<div class="mt-4 text-center">
+<code class="text-xs text-slate-500 font-mono bg-black/30 px-2 py-1 rounded">winget install talon-data</code>
+</div>
+</div>
+</div>
+<div class="max-w-4xl mx-auto mb-16">
+<div class="rounded-2xl border border-white/10 bg-surface-dark p-6">
+<div class="flex flex-col md:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400">verified_user</span>
+<div>
+<h4 class="text-white font-medium">验证您的下载</h4>
+<p class="text-sm text-slate-400">确保文件的完整性和安全性。</p>
+</div>
+</div>
+<div class="flex-1 w-full md:w-auto">
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="text-slate-500 text-xs font-mono">$</span>
+</div>
+<input class="block w-full rounded-lg bg-black/50 border-white/10 pl-8 pr-12 py-3 text-sm font-mono text-slate-300 focus:ring-primary focus:border-primary transition-colors" readonly="" type="text" value="sha256sum talon_linux_amd64"/>
+<button class="absolute inset-y-0 right-0 px-3 flex items-center text-slate-500 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-lg">content_copy</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-16">
+<a class="group p-6 rounded-2xl bg-surface-lighter border border-white/5 hover:border-primary/30 transition-all flex items-center gap-4 hover:bg-surface-lighter/80" href="#">
+<div class="w-12 h-12 rounded-full bg-surface-dark border border-white/10 flex items-center justify-center group-hover:border-primary/50 transition-colors">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">terminal</span>
+</div>
+<div>
+<h4 class="text-white font-bold group-hover:text-primary transition-colors mb-1">Talon-CLI 交互式终端</h4>
+<p class="text-sm text-slate-400">用于管理和监控的高级命令行工具。</p>
+</div>
+<span class="material-symbols-outlined text-slate-600 ml-auto group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+<a class="group p-6 rounded-2xl bg-surface-lighter border border-white/5 hover:border-accent/30 transition-all flex items-center gap-4 hover:bg-surface-lighter/80" href="#">
+<div class="w-12 h-12 rounded-full bg-surface-dark border border-white/10 flex items-center justify-center group-hover:border-accent/50 transition-colors">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-accent transition-colors">api</span>
+</div>
+<div>
+<h4 class="text-white font-bold group-hover:text-accent transition-colors mb-1">共享库 (C ABI / FFI)</h4>
+<p class="text-sm text-slate-400">将 Talon 引擎嵌入到您的应用程序中。</p>
+</div>
+<span class="material-symbols-outlined text-slate-600 ml-auto group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+<div class="flex flex-col items-center justify-center space-y-4">
+<div class="flex items-center gap-6 text-sm text-slate-500">
+<span>当前版本: <span class="text-white font-mono">v0.1.0</span></span>
+<span class="w-1 h-1 bg-slate-700 rounded-full"></span>
+<span>发布日期: <span class="text-white font-mono">2026-04-12</span></span>
+</div>
+<a class="text-primary hover:text-white text-sm font-medium transition-colors flex items-center gap-1" href="#">
+                查看变更日志
+                <span class="material-symbols-outlined text-base">open_in_new</span>
+</a>
+</div>
+</div>
+</main>
+<footer class="bg-[#050508] border-t border-white/10 pt-16 pb-8 mt-auto">
+<div class="container mx-auto px-4 max-w-7xl">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+<div class="col-span-1 md:col-span-1">
+<div class="flex items-center gap-2 mb-6">
+<div class="w-6 h-6 text-primary">
+<svg class="w-full h-full" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M24 4C25.7818 14.2173 33.7827 22.2182 44 24C33.7827 25.7818 25.7818 33.7827 24 44C22.2182 33.7827 14.2173 25.7818 4 24C14.2173 22.2182 22.2182 14.2173 24 4Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-white text-lg font-bold">Talon</h2>
+</div>
+<p class="text-slate-500 text-sm mb-6">
+                    全球首个专为 AI 智能体和 LLM 应用设计的多模态融合引擎。
+                </p>
+<div class="flex gap-4">
+<a class="text-slate-400 hover:text-white transition-colors" href="#">
+<span class="sr-only">Twitter</span>
+<svg aria-hidden="true" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path></svg>
+</a>
+<a class="text-slate-400 hover:text-white transition-colors" href="#">
+<span class="sr-only">GitHub</span>
+<svg aria-hidden="true" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" fill-rule="evenodd"></path></svg>
+</a>
+</div>
+</div>
+<div>
+<h3 class="text-white font-bold mb-4">产品</h3>
+<ul class="space-y-2">
+<li><a class="text-slate-400 hover:text-primary transition-colors text-sm" href="#">下载</a></li>
+<li><a class="text-slate-400 hover:text-primary transition-colors text-sm" href="#">文档</a></li>
+<li><a class="text-slate-400 hover:text-primary transition-colors text-sm" href="#">变更日志</a></li>
+<li><a class="text-slate-400 hover:text-primary transition-colors text-sm" href="#">集成</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-white font-bold mb-4">使用场景</h3>
+<ul class="space-y-2">
+<li><a class="text-slate-400 hover:text-primary transition-colors text-sm" href="#">智能体记忆</a></li>
+<li><a class="text-slate-400 hover:text-primary transition-colors text-sm" href="#">RAG 管道</a></li>
+<li><a class="text-slate-400 hover:text-primary transition-colors text-sm" href="#">实时分析</a></li>
+<li><a class="text-slate-400 hover:text-primary transition-colors text-sm" href="#">知识图谱</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-white font-bold mb-4">公司</h3>
+<ul class="space-y-2">
+<li><a class="text-slate-400 hover:text-primary transition-colors text-sm" href="#">关于</a></li>
+<li><a class="text-slate-400 hover:text-primary transition-colors text-sm" href="#">职业</a></li>
+<li><a class="text-slate-400 hover:text-primary transition-colors text-sm" href="#">博客</a></li>
+<li><a class="text-slate-400 hover:text-primary transition-colors text-sm" href="#">联系我们</a></li>
+</ul>
+</div>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-center border-t border-white/5 pt-8">
+<p class="text-slate-500 text-sm">© 2024 Talon Data Inc. 保留所有权利。</p>
+<div class="flex gap-6 mt-4 md:mt-0">
+<a class="text-slate-500 hover:text-white text-sm" href="#">隐私</a>
+<a class="text-slate-500 hover:text-white text-sm" href="#">条款</a>
+<a class="text-slate-500 hover:text-white text-sm" href="#">安全</a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

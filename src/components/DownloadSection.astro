@@ -1,0 +1,194 @@
+---
+import { getLocaleFromUrl, getTranslations } from '../i18n';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = getTranslations(locale);
+const dl = t.download;
+const p = (path: string) => locale === 'zh' ? path : `/en${path}`;
+---
+
+<main class="flex-grow pt-32 pb-12 relative">
+  <div class="absolute inset-0 bg-grid-pattern cyber-grid opacity-20 pointer-events-none"></div>
+  <div class="absolute inset-0 bg-radial-glow pointer-events-none"></div>
+
+  <div class="relative z-10 container mx-auto px-4 max-w-7xl">
+    <!-- Hero -->
+    <div class="flex flex-col items-center text-center mb-16 space-y-4">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-lighter border border-white/10 text-slate-400 text-xs font-mono mb-2">
+        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+        {dl.version}
+      </div>
+      <h1 class="text-5xl md:text-6xl font-black text-white tracking-tight">
+        {dl.title} <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">{dl.titleHighlight}</span>
+      </h1>
+      <p class="text-lg md:text-xl text-slate-400 max-w-2xl leading-relaxed">{dl.subtitle}</p>
+    </div>
+
+    <!-- Platform Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto mb-16">
+      <!-- macOS -->
+      <div class="bento-card rounded-3xl p-8 border border-white/5 flex flex-col h-full group">
+        <div class="mb-6 flex justify-between items-start">
+          <div class="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center border border-white/10">
+            <span class="material-symbols-outlined text-3xl text-white">laptop_mac</span>
+          </div>
+          <span class="px-2 py-1 rounded bg-slate-800/50 text-slate-400 text-xs font-mono border border-white/10">{dl.macOS.badge}</span>
+        </div>
+        <h3 class="text-2xl font-bold text-white mb-4">{dl.macOS.name}</h3>
+        <div class="space-y-4 mb-8 flex-grow">
+          <div>
+            <div class="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-2">{dl.macOS.arch}</div>
+            <div class="flex gap-2">
+              <span class="px-3 py-1.5 rounded-md bg-surface-lighter border border-white/10 text-sm text-slate-300 font-mono">{dl.macOS.archList}</span>
+              <span class="px-3 py-1.5 rounded-md bg-surface-lighter border border-white/10 text-sm text-slate-300 font-mono">{dl.macOS.archIntel}</span>
+            </div>
+          </div>
+          <div>
+            <div class="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-2">{dl.macOS.format}</div>
+            <div class="flex gap-2 text-sm text-slate-400">
+              <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">terminal</span> Binary</span>
+              <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">package</span> Homebrew</span>
+            </div>
+          </div>
+        </div>
+        <button class="w-full h-12 rounded-lg bg-white text-[#0a0a0f] font-bold hover:bg-slate-200 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all flex items-center justify-center gap-2 group-hover:scale-[1.02]">
+          <span class="material-symbols-outlined">download</span>
+          {dl.macOS.btn}
+        </button>
+        <div class="mt-4 text-center">
+          <code class="text-xs text-slate-500 font-mono bg-black/30 px-2 py-1 rounded">{dl.macOS.brew}</code>
+        </div>
+      </div>
+
+      <!-- Linux (Recommended) -->
+      <div class="bento-card rounded-3xl p-8 border border-white/5 flex flex-col h-full group relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-32 h-32 bg-primary/20 blur-[60px] rounded-full pointer-events-none"></div>
+        <div class="mb-6 flex justify-between items-start relative z-10">
+          <div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center border border-primary/20">
+            <span class="material-symbols-outlined text-3xl text-white">terminal</span>
+          </div>
+          <span class="px-2 py-1 rounded bg-primary/20 text-primary text-xs font-mono border border-primary/20">{dl.linux.badge}</span>
+        </div>
+        <h3 class="text-2xl font-bold text-white mb-4 relative z-10">{dl.linux.name}</h3>
+        <div class="space-y-4 mb-8 flex-grow relative z-10">
+          <div>
+            <div class="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-2">{dl.macOS.arch}</div>
+            <div class="flex gap-2">
+              <span class="px-3 py-1.5 rounded-md bg-surface-lighter border border-white/10 text-sm text-slate-300 font-mono">{dl.linux.arch1}</span>
+              <span class="px-3 py-1.5 rounded-md bg-surface-lighter border border-white/10 text-sm text-slate-300 font-mono">{dl.linux.arch2}</span>
+            </div>
+          </div>
+          <div>
+            <div class="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-2">{dl.macOS.format}</div>
+            <div class="flex gap-2 text-sm text-slate-400">
+              <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">terminal</span> Binary</span>
+              <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">widgets</span> AppImage</span>
+            </div>
+          </div>
+        </div>
+        <button class="w-full h-12 rounded-lg bg-primary text-white font-bold hover:bg-primary/90 hover:shadow-[0_0_20px_rgba(55,19,236,0.5)] transition-all flex items-center justify-center gap-2 relative z-10 group-hover:scale-[1.02]">
+          <span class="material-symbols-outlined">download</span>
+          {dl.linux.btn}
+        </button>
+        <div class="mt-4 text-center relative z-10">
+          <code class="text-xs text-slate-400 font-mono bg-black/30 px-2 py-1 rounded select-all cursor-pointer hover:text-white transition-colors">{dl.linux.curl}</code>
+        </div>
+      </div>
+
+      <!-- Windows -->
+      <div class="bento-card rounded-3xl p-8 border border-white/5 flex flex-col h-full group">
+        <div class="mb-6 flex justify-between items-start">
+          <div class="w-14 h-14 rounded-2xl bg-blue-500/10 flex items-center justify-center border border-blue-500/20">
+            <span class="material-symbols-outlined text-3xl text-white">grid_view</span>
+          </div>
+          <span class="px-2 py-1 rounded bg-blue-900/30 text-blue-300 text-xs font-mono border border-blue-500/30">{dl.windows.badge}</span>
+        </div>
+        <h3 class="text-2xl font-bold text-white mb-4">{dl.windows.name}</h3>
+        <div class="space-y-4 mb-8 flex-grow">
+          <div>
+            <div class="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-2">{dl.macOS.arch}</div>
+            <div class="flex gap-2">
+              <span class="px-3 py-1.5 rounded-md bg-surface-lighter border border-white/10 text-sm text-slate-300 font-mono">{dl.windows.arch}</span>
+            </div>
+          </div>
+          <div>
+            <div class="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-2">{dl.macOS.format}</div>
+            <div class="flex gap-2 text-sm text-slate-400">
+              <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">check_box_outline_blank</span> .exe Installer</span>
+            </div>
+          </div>
+        </div>
+        <button class="w-full h-12 rounded-lg bg-surface-lighter border border-white/20 text-white font-bold hover:bg-white/10 hover:border-white/40 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] transition-all flex items-center justify-center gap-2 group-hover:scale-[1.02]">
+          <span class="material-symbols-outlined">download</span>
+          {dl.windows.btn}
+        </button>
+        <div class="mt-4 text-center">
+          <code class="text-xs text-slate-500 font-mono bg-black/30 px-2 py-1 rounded">{dl.windows.winget}</code>
+        </div>
+      </div>
+    </div>
+
+    <!-- Verify Download -->
+    <div class="max-w-4xl mx-auto mb-16">
+      <div class="rounded-2xl border border-white/10 bg-surface-dark p-6">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-slate-400">verified_user</span>
+            <div>
+              <h4 class="text-white font-medium">{dl.verify.title}</h4>
+              <p class="text-sm text-slate-400">{dl.verify.desc}</p>
+            </div>
+          </div>
+          <div class="flex-1 w-full md:w-auto">
+            <div class="relative group">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <span class="text-slate-500 text-xs font-mono">$</span>
+              </div>
+              <input class="block w-full rounded-lg bg-black/50 border border-white/10 pl-8 pr-12 py-3 text-sm font-mono text-slate-300 focus:ring-primary focus:border-primary transition-colors" readonly type="text" value="sha256sum talon_linux_amd64" />
+              <button class="absolute inset-y-0 right-0 px-3 flex items-center text-slate-500 hover:text-white transition-colors">
+                <span class="material-symbols-outlined text-lg">content_copy</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CLI & FFI Links -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-16">
+      <a class="group p-6 rounded-2xl bg-surface-lighter border border-white/5 hover:border-primary/30 transition-all flex items-center gap-4 hover:bg-surface-lighter/80" href={p('/quickstart')}>
+        <div class="w-12 h-12 rounded-full bg-surface-dark border border-white/10 flex items-center justify-center group-hover:border-primary/50 transition-colors">
+          <span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">terminal</span>
+        </div>
+        <div>
+          <h4 class="text-white font-bold group-hover:text-primary transition-colors mb-1">{dl.cli.title}</h4>
+          <p class="text-sm text-slate-400">{dl.cli.desc}</p>
+        </div>
+        <span class="material-symbols-outlined text-slate-600 ml-auto group-hover:translate-x-1 transition-transform">arrow_forward</span>
+      </a>
+      <a class="group p-6 rounded-2xl bg-surface-lighter border border-white/5 hover:border-accent/30 transition-all flex items-center gap-4 hover:bg-surface-lighter/80" href={p('/sdk')}>
+        <div class="w-12 h-12 rounded-full bg-surface-dark border border-white/10 flex items-center justify-center group-hover:border-accent/50 transition-colors">
+          <span class="material-symbols-outlined text-slate-400 group-hover:text-accent transition-colors">api</span>
+        </div>
+        <div>
+          <h4 class="text-white font-bold group-hover:text-accent transition-colors mb-1">{dl.ffi.title}</h4>
+          <p class="text-sm text-slate-400">{dl.ffi.desc}</p>
+        </div>
+        <span class="material-symbols-outlined text-slate-600 ml-auto group-hover:translate-x-1 transition-transform">arrow_forward</span>
+      </a>
+    </div>
+
+    <!-- Version Info -->
+    <div class="flex flex-col items-center justify-center space-y-4">
+      <div class="flex items-center gap-6 text-sm text-slate-500">
+        <span>{dl.currentVersion}: <span class="text-white font-mono">v0.1.0</span></span>
+        <span class="w-1 h-1 bg-slate-700 rounded-full"></span>
+        <span>{dl.releaseDate}: <span class="text-white font-mono">2026-02-28</span></span>
+      </div>
+      <a class="text-primary hover:text-white text-sm font-medium transition-colors flex items-center gap-1" href={p('/features')}>
+        {dl.changelog}
+        <span class="material-symbols-outlined text-base">open_in_new</span>
+      </a>
+    </div>
+  </div>
+</main>

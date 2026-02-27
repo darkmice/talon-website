@@ -1,0 +1,60 @@
+---
+import { getLocaleFromUrl, getTranslations } from '../i18n';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = getTranslations(locale);
+const p = (path: string) => locale === 'zh' ? path : `/en${path}`;
+---
+
+<section class="relative min-h-[80vh] pt-24 pb-12 flex flex-col items-center justify-center overflow-hidden">
+  <div class="absolute inset-0 bg-grid-pattern cyber-grid opacity-20 pointer-events-none"></div>
+  <div class="absolute inset-0 bg-radial-glow pointer-events-none"></div>
+
+  <div class="relative z-10 container mx-auto px-4 flex flex-col items-center text-center gap-8 max-w-5xl">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold uppercase tracking-wider mb-2">
+      <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
+      {t.hero.badge}
+    </div>
+
+    <h1 class="text-5xl md:text-7xl lg:text-8xl font-black leading-tight tracking-tighter text-white">
+      {t.hero.titleLine1} <br />
+      <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-accent text-glow">
+        {t.hero.titleLine2}
+      </span>
+    </h1>
+
+    <p class="text-lg md:text-xl text-slate-400 max-w-2xl leading-relaxed">
+      {t.hero.subtitle}
+    </p>
+
+    <div class="flex flex-wrap items-center justify-center gap-4 mt-4">
+      <a href={p('/quickstart')} class="h-12 px-8 rounded-lg bg-white text-[#0a0a0f] font-bold hover:bg-slate-200 transition-colors flex items-center gap-2">
+        <span class="material-symbols-outlined text-[20px]">bolt</span>
+        {t.hero.cta}
+      </a>
+      <a href={p('/platform')} class="h-12 px-8 rounded-lg bg-surface-lighter border border-white/10 text-white font-medium hover:bg-white/5 transition-colors flex items-center gap-2 group">
+        {t.hero.docs}
+        <span class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+      </a>
+    </div>
+
+    <div class="mt-16 w-full max-w-4xl grid grid-cols-2 md:grid-cols-4 gap-4 p-4 rounded-2xl bg-surface-dark/50 border border-white/5 backdrop-blur-sm">
+      <div class="flex flex-col items-center justify-center p-4">
+        <span class="text-3xl font-bold text-white">0.01ms</span>
+        <span class="text-xs text-slate-400 uppercase tracking-widest mt-1">{t.hero.statLatency}</span>
+      </div>
+      <div class="flex flex-col items-center justify-center p-4 border-l border-white/5">
+        <span class="text-3xl font-bold text-white">625K</span>
+        <span class="text-xs text-slate-400 uppercase tracking-widest mt-1">{t.hero.statOps}</span>
+      </div>
+      <div class="flex flex-col items-center justify-center p-4 border-l border-white/5">
+        <span class="text-3xl font-bold text-white">8+1</span>
+        <span class="text-xs text-slate-400 uppercase tracking-widest mt-1">{t.hero.statEngines}</span>
+      </div>
+      <div class="flex flex-col items-center justify-center p-4 border-l border-white/5">
+        <span class="text-3xl font-bold text-white">1362+</span>
+        <span class="text-xs text-slate-400 uppercase tracking-widest mt-1">{t.hero.statAcid}</span>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,245 @@
+---
+import { getLocaleFromUrl, getTranslations } from '../i18n';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = getTranslations(locale);
+const df = t.aiDataFlow;
+const prefix = locale === 'zh' ? '' : '/en';
+const logColorMap: Record<string, string> = { INFO: 'text-green-500', DEBUG: 'text-blue-500', TRACE: 'text-purple-500' };
+---
+
+<style>
+  .glass-panel {
+    background: rgba(14, 14, 18, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  }
+  .neon-border {
+    box-shadow: 0 0 5px rgba(0, 243, 255, 0.2), inset 0 0 10px rgba(0, 243, 255, 0.05);
+    border-color: rgba(0, 243, 255, 0.3);
+  }
+  .custom-scroll::-webkit-scrollbar { width: 8px; height: 8px; }
+  .custom-scroll::-webkit-scrollbar-track { background: #0e0e12; }
+  .custom-scroll::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+  .custom-scroll::-webkit-scrollbar-thumb:hover { background: #555; }
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 10px rgba(55, 19, 236, 0.2), 0 0 20px rgba(55, 19, 236, 0.1); }
+    50% { box-shadow: 0 0 20px rgba(55, 19, 236, 0.5), 0 0 40px rgba(55, 19, 236, 0.3); }
+  }
+  .animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+</style>
+
+<main class="flex-grow pt-32 pb-12 px-4 md:px-6 relative">
+  <div class="absolute inset-0 bg-grid-pattern cyber-grid opacity-15 pointer-events-none"></div>
+
+  <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 h-full">
+    <!-- Left: Main Content -->
+    <div class="lg:col-span-9 flex flex-col gap-6">
+      <!-- Header -->
+      <div class="flex items-center justify-between">
+        <div>
+          <div class="flex items-center gap-3 mb-2">
+            <span class="material-symbols-outlined text-primary">neurology</span>
+            <h1 class="text-2xl font-bold text-white">{df.title} <span class="text-slate-500 font-normal mx-2">{df.titleSep}</span> {df.titleSub}</h1>
+          </div>
+          <p class="text-slate-400 text-sm max-w-2xl">{df.desc}</p>
+        </div>
+        <div class="hidden sm:flex gap-2">
+          <button class="px-3 py-1.5 text-xs font-medium text-slate-300 bg-surface-lighter border border-white/10 rounded hover:bg-white/5 transition-colors">{df.exportPng}</button>
+          <button class="px-3 py-1.5 text-xs font-medium text-slate-300 bg-surface-lighter border border-white/10 rounded hover:bg-white/5 transition-colors">{df.viewLogs}</button>
+        </div>
+      </div>
+
+      <!-- Data Flow Diagram -->
+      <div class="relative w-full aspect-[16/9] lg:aspect-[16/8] bg-[#08080c] rounded-xl border border-white/10 overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(55,19,236,0.1),transparent_60%)]"></div>
+        <div class="absolute inset-0 p-8 flex items-center justify-center">
+          <!-- SVG Flow Lines -->
+          <svg class="absolute inset-0 w-full h-full pointer-events-none z-0">
+            <defs>
+              <linearGradient id="grad-cyan" x1="0%" x2="100%" y1="0%" y2="0%">
+                <stop offset="0%" style="stop-color:#050508;stop-opacity:0"></stop>
+                <stop offset="50%" style="stop-color:#00f3ff;stop-opacity:1"></stop>
+                <stop offset="100%" style="stop-color:#050508;stop-opacity:0"></stop>
+              </linearGradient>
+              <linearGradient id="grad-violet" x1="0%" x2="100%" y1="0%" y2="0%">
+                <stop offset="0%" style="stop-color:#050508;stop-opacity:0"></stop>
+                <stop offset="50%" style="stop-color:#bd00ff;stop-opacity:1"></stop>
+                <stop offset="100%" style="stop-color:#050508;stop-opacity:0"></stop>
+              </linearGradient>
+            </defs>
+          </svg>
+
+          <!-- Center: Engine Core -->
+          <div class="relative z-20 flex flex-col items-center justify-center w-48 h-48">
+            <div class="absolute inset-0 bg-primary/20 rounded-full blur-2xl animate-pulse-glow"></div>
+            <div class="w-32 h-32 rounded-full bg-surface-dark border-2 border-primary shadow-[0_0_30px_rgba(55,19,236,0.4)] flex items-center justify-center relative z-10">
+              <div class="w-24 h-24 rounded-full border border-white/10 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+                <svg class="w-12 h-12 text-white animate-[spin_10s_linear_infinite]" fill="none" viewBox="0 0 24 24">
+                  <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+                </svg>
+              </div>
+            </div>
+            <div class="absolute -bottom-8 w-max px-3 py-1 bg-primary/20 border border-primary/50 text-primary-100 text-xs font-mono rounded">{df.engineCore}</div>
+          </div>
+
+          <!-- Left: Session Manager -->
+          <div class="absolute left-10 lg:left-24 top-1/2 -translate-y-1/2 z-20 flex flex-col items-center gap-4">
+            <div class="w-32 p-4 glass-panel rounded-lg neon-border flex flex-col items-center text-center">
+              <span class="material-symbols-outlined text-accent mb-2">input</span>
+              <h3 class="text-xs font-bold text-white uppercase tracking-wider mb-1">{df.sessionManager}</h3>
+              <p class="text-[10px] text-accent font-mono">{df.sessionDesc}</p>
+            </div>
+            <div class="text-[10px] text-slate-500 font-mono rotate-90 lg:rotate-0">{df.incomingMsg}</div>
+          </div>
+
+          <!-- Top-Right: Token Controller -->
+          <div class="absolute right-10 lg:right-32 top-10 lg:top-16 z-20 flex flex-col items-center gap-3">
+            <div class="w-40 p-3 glass-panel rounded-lg border-violet-500/30 shadow-[0_0_15px_rgba(139,92,246,0.15)] flex flex-col items-center text-center">
+              <div class="flex items-center gap-2 mb-1">
+                <span class="w-2 h-2 rounded-full bg-violet-500 animate-pulse"></span>
+                <h3 class="text-xs font-bold text-white uppercase">{df.tokenController}</h3>
+              </div>
+              <p class="text-[10px] text-violet-300 font-mono mb-2">{df.tokenDesc}</p>
+              <div class="w-full h-1 bg-slate-800 rounded-full overflow-hidden">
+                <div class="h-full w-2/3 bg-violet-500"></div>
+              </div>
+              <p class="text-[9px] text-slate-500 mt-1 font-mono">{df.tokenTruncation}</p>
+            </div>
+          </div>
+
+          <!-- Bottom-Left: Vector + Memory -->
+          <div class="absolute left-10 lg:left-32 bottom-10 lg:bottom-16 z-20 flex flex-col items-center gap-3">
+            <div class="w-48 p-3 glass-panel rounded-lg neon-border flex items-center gap-3">
+              <div class="flex-1 flex flex-col items-center">
+                <span class="material-symbols-outlined text-accent text-sm">database</span>
+                <span class="text-[9px] text-slate-400 mt-1">{df.vectorIndex}</span>
+              </div>
+              <div class="flex flex-col items-center gap-1">
+                <span class="material-symbols-outlined text-slate-600 text-xs">sync_alt</span>
+              </div>
+              <div class="flex-1 flex flex-col items-center">
+                <span class="material-symbols-outlined text-white text-sm">hard_drive</span>
+                <span class="text-[9px] text-slate-400 mt-1">{df.memoryStore}</span>
+              </div>
+            </div>
+            <div class="flex gap-4">
+              <span class="text-[10px] text-accent bg-accent/10 px-2 py-0.5 rounded border border-accent/20">{df.vectorTag}</span>
+              <span class="text-[10px] text-white bg-white/5 px-2 py-0.5 rounded border border-white/10">{df.crossSessionTag}</span>
+            </div>
+          </div>
+
+          <!-- Labels -->
+          <div class="absolute top-[28%] right-[30%] text-[9px] text-violet-400 font-mono bg-black/80 px-1 rounded border border-violet-500/30 rotate-12">{df.optimizeLabel}</div>
+          <div class="absolute bottom-[28%] left-[30%] text-[9px] text-cyan-400 font-mono bg-black/80 px-1 rounded border border-cyan-500/30 -rotate-12">{df.persistLabel}</div>
+        </div>
+      </div>
+
+      <!-- Code Block -->
+      <div class="w-full bg-[#0e0e12] rounded-lg border border-white/10 overflow-hidden flex flex-col">
+        <div class="flex items-center justify-between px-4 py-2 border-b border-white/5 bg-[#131318]">
+          <div class="flex gap-4 text-xs font-mono">
+            {df.codeTabs.map((tab: string, i: number) => (
+              <span class={i === 0 ? 'text-white border-b border-primary pb-2 -mb-2.5' : 'text-slate-500 hover:text-slate-300 cursor-pointer'}>{tab}</span>
+            ))}
+          </div>
+          <div class="flex gap-1.5">
+            <div class="w-2.5 h-2.5 rounded-full bg-slate-700"></div>
+            <div class="w-2.5 h-2.5 rounded-full bg-slate-700"></div>
+          </div>
+        </div>
+        <div class="p-4 overflow-x-auto custom-scroll">
+          <pre class="font-mono text-sm leading-relaxed text-slate-300"><span class="text-secondary">import</span> talon_db
+<span class="text-slate-500"># Initialize the AI memory engine</span>
+db = talon_db.<span class="text-accent">connect</span>(<span class="text-green-400">"ws://localhost:8080"</span>)
+<span class="text-slate-500"># Auto-ingest message with memory management enabled</span>
+<span class="text-secondary">await</span> db.ai().<span class="text-accent">append_message</span>(
+    session_id=<span class="text-green-400">"user_123_session"</span>,
+    role=<span class="text-green-400">"user"</span>,
+    content=<span class="text-green-400">"Remember that I prefer concise Python code for my backend tasks."</span>,
+    memory_policy=<span class="text-primary">"long_term"</span>  <span class="text-slate-500"># Enables vector persistence &amp; graph linking</span>
+)</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Stats Sidebar -->
+    <div class="lg:col-span-3 flex flex-col gap-6">
+      <div class="glass-panel rounded-xl p-5 flex flex-col gap-5 sticky top-24">
+        <!-- Header -->
+        <div class="flex items-center justify-between border-b border-white/5 pb-4">
+          <h2 class="text-sm font-bold text-white uppercase tracking-wide">{df.statsTitle}</h2>
+          <span class="flex h-2 w-2 relative">
+            <span class="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-accent opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+          </span>
+        </div>
+
+        <!-- Key Facts -->
+        <div class="space-y-1">
+          <div class="flex justify-between text-xs text-slate-400">
+            <span>{df.factLabel}</span>
+            <span class="font-mono text-white">{df.factValue}</span>
+          </div>
+          <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+            <div class="bg-gradient-to-r from-primary to-secondary h-full w-[75%]"></div>
+          </div>
+        </div>
+
+        <!-- Recall Latency -->
+        <div class="space-y-1">
+          <div class="flex justify-between text-xs text-slate-400">
+            <span>{df.latencyLabel}</span>
+            <span class="font-mono text-accent">{df.latencyValue}</span>
+          </div>
+          <div class="relative w-full bg-slate-800 h-10 rounded-md overflow-hidden border border-white/5">
+            <svg class="absolute bottom-0 left-0 right-0 h-8 w-full" preserveAspectRatio="none" viewBox="0 0 100 32">
+              <path d="M0,20 L10,15 L20,25 L30,10 L40,18 L50,5 L60,15 L70,8 L80,22 L90,10 L100,25 L100,32 L0,32 Z" fill="rgba(0, 240, 255, 0.1)" stroke="rgba(0, 240, 255, 0.5)" stroke-width="1"></path>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Tokens Saved -->
+        <div class="space-y-1">
+          <div class="flex justify-between text-xs text-slate-400">
+            <span>{df.tokensSavedLabel}</span>
+            <span class="font-mono text-violet-300">{df.tokensSavedValue}</span>
+          </div>
+          <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+            <div class="bg-gradient-to-r from-violet-600 to-violet-400 h-full w-[60%]"></div>
+          </div>
+          <p class="text-[10px] text-slate-500 mt-1">{df.tokensSavedNote}</p>
+        </div>
+
+        <!-- Log Feed -->
+        <div class="mt-4 p-3 bg-black/40 rounded border border-white/5 font-mono text-[10px] text-slate-400 h-32 overflow-y-hidden relative">
+          <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/80 pointer-events-none"></div>
+          <div class="space-y-1">
+            {df.logs.map((log: any) => (
+              <p><span class={logColorMap[log.level] || 'text-slate-500'}>{log.level}</span> [{log.time}] {log.msg}</p>
+            ))}
+            <p><span class="text-slate-600">... waiting for stream</span></p>
+          </div>
+        </div>
+
+        <button class="w-full py-2 mt-2 text-xs font-bold text-black bg-white hover:bg-slate-200 transition-colors rounded uppercase tracking-wider">{df.viewDashboard}</button>
+      </div>
+
+      <!-- Related Docs -->
+      <div class="p-4 border border-white/10 rounded-xl bg-surface-lighter/50">
+        <h3 class="text-xs font-bold text-white mb-2">{df.relatedDocs}</h3>
+        <ul class="space-y-2">
+          {df.docLinks.map((link: string) => (
+            <li>
+              <a class="flex items-center justify-between text-xs text-slate-400 hover:text-primary transition-colors group" href={`${prefix}/quickstart`}>
+                <span>{link}</span>
+                <span class="material-symbols-outlined text-[14px] group-hover:translate-x-1 transition-transform">chevron_right</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</main>
