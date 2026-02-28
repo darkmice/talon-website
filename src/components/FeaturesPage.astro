@@ -1,10 +1,11 @@
 ---
-import { getLocaleFromUrl, getTranslations, getLocalizedPath } from '../i18n';
+import { getLocaleFromUrl, getTranslations, getLocalizedPath, getDocsUrl } from '../i18n';
 
 const locale = getLocaleFromUrl(Astro.url);
 const t = getTranslations(locale);
 const ft = t.featuresPage;
 const p = (path: string) => getLocalizedPath(path, locale);
+const docsUrl = getDocsUrl('/engines/sql', locale);
 ---
 
 <style>
@@ -220,7 +221,7 @@ const p = (path: string) => getLocalizedPath(path, locale);
     <h2 class="text-3xl font-bold text-white mb-6">{ft.cta}</h2>
     <div class="flex justify-center gap-4">
       <a href={p('/quickstart')} class="h-12 px-8 rounded-lg bg-primary hover:bg-primary/90 text-white font-bold shadow-lg shadow-primary/25 transition-all flex items-center">{ft.ctaStart}</a>
-      <a href={p('/sdk')} class="h-12 px-8 rounded-lg bg-[#151520] border border-white/10 text-white hover:bg-white/5 transition-all flex items-center">{ft.ctaDocs}</a>
+      <a href={docsUrl} target="_blank" rel="noopener" class="h-12 px-8 rounded-lg bg-[#151520] border border-white/10 text-white hover:bg-white/5 transition-all flex items-center">{ft.ctaDocs}</a>
     </div>
   </div>
 </main>

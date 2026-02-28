@@ -1,10 +1,11 @@
 ---
-import { getLocaleFromUrl, getTranslations, getLocalizedPath } from '../i18n';
+import { getLocaleFromUrl, getTranslations, getLocalizedPath, getDocsUrl } from '../i18n';
 
 const locale = getLocaleFromUrl(Astro.url);
 const t = getTranslations(locale);
 const kg = t.knowledgeGraphPage;
 const p = (path: string) => getLocalizedPath(path, locale);
+const docsUrl = getDocsUrl('/engines/graph', locale);
 ---
 
 <style>
@@ -194,7 +195,7 @@ const p = (path: string) => getLocalizedPath(path, locale);
         </div>
         <div class="flex gap-4">
           <a class="px-6 py-3 rounded-lg bg-white text-slate-900 font-bold hover:bg-slate-200 transition-colors" href={p('/download')}>{kg.ctaStart}</a>
-          <a class="px-6 py-3 rounded-lg border border-white/20 text-white font-medium hover:bg-white/5 transition-colors" href={p('/quickstart')}>{kg.ctaDocs}</a>
+          <a class="px-6 py-3 rounded-lg border border-white/20 text-white font-medium hover:bg-white/5 transition-colors" href={docsUrl} target="_blank" rel="noopener">{kg.ctaDocs}</a>
         </div>
       </div>
     </div>

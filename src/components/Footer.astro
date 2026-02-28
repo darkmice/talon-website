@@ -1,9 +1,10 @@
 ---
-import { getLocaleFromUrl, getTranslations, getLocalizedPath } from '../i18n';
+import { getLocaleFromUrl, getTranslations, getLocalizedPath, getDocsUrl } from '../i18n';
 
 const locale = getLocaleFromUrl(Astro.url);
 const t = getTranslations(locale);
 const p = (path: string) => getLocalizedPath(path, locale);
+const docsUrl = getDocsUrl('/guide/getting-started', locale);
 ---
 
 <footer class="bg-[#050508] border-t border-white/10 pt-16 pb-8">
@@ -33,7 +34,7 @@ const p = (path: string) => getLocalizedPath(path, locale);
         <h3 class="text-white font-bold mb-4">{t.footer.product}</h3>
         <ul class="space-y-2">
           <li><a class="text-slate-400 hover:text-primary transition-colors text-sm" href={p('/download')}>{t.footer.productLinks.download}</a></li>
-          <li><a class="text-slate-400 hover:text-primary transition-colors text-sm" href={p('/quickstart')}>{t.footer.productLinks.docs}</a></li>
+          <li><a class="text-slate-400 hover:text-primary transition-colors text-sm" href={docsUrl} target="_blank" rel="noopener">{t.footer.productLinks.docs}</a></li>
           <li><a class="text-slate-400 hover:text-primary transition-colors text-sm" href={p('/sdk')}>{t.footer.productLinks.integrations}</a></li>
           <li><a class="text-slate-400 hover:text-primary transition-colors text-sm" href={p('/features')}>{t.footer.productLinks.changelog}</a></li>
         </ul>

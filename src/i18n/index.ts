@@ -29,3 +29,10 @@ export function getAltPath(url: URL, locale: Locale): string {
   if (locale === 'zh') return `${base}/en${pathname}`;
   return `${base}${pathname.replace(/^\/en/, '') || '/'}`;
 }
+
+const DOCS_SITE = 'https://darkmice.github.io/talon-docs';
+
+export function getDocsUrl(path: string, locale: Locale): string {
+  const prefix = locale === 'zh' ? '/zh' : '';
+  return `${DOCS_SITE}${prefix}${path}`;
+}

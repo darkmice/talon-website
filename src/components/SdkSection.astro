@@ -1,11 +1,12 @@
 ---
-import { getLocaleFromUrl, getTranslations, getLocalizedPath } from '../i18n';
+import { getLocaleFromUrl, getTranslations, getLocalizedPath, getDocsUrl } from '../i18n';
 import { sdkExamples } from '../data/sdk-examples';
 
 const locale = getLocaleFromUrl(Astro.url);
 const t = getTranslations(locale);
 const sdk = t.sdk;
 const p = (path: string) => getLocalizedPath(path, locale);
+const docsUrl = getDocsUrl('/guide/getting-started', locale);
 
 const langKeys = ['Go', 'Rust', 'Python', 'Node.js', 'Java', 'C/C++', '.NET'];
 const badges: Record<string, string> = { Go: 'Go 1.21+', Rust: 'Rust 2021', Python: 'Python 3.9+', 'Node.js': 'Node 18+', Java: 'Java 17+', 'C/C++': 'C11 / C++17', '.NET': '.NET 8+' };
@@ -55,7 +56,7 @@ const langs = langKeys.map(key => {
       </h1>
       <p class="text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed whitespace-pre-line">{sdk.subtitle}</p>
       <div class="flex justify-center gap-4 mt-8">
-        <a class="inline-flex items-center gap-2 text-primary hover:text-accent transition-colors font-medium" href={p('/quickstart')}>
+        <a class="inline-flex items-center gap-2 text-primary hover:text-accent transition-colors font-medium" href={docsUrl} target="_blank" rel="noopener">
           {sdk.docsLink} <span class="material-symbols-outlined text-sm">arrow_forward</span>
         </a>
       </div>
@@ -158,7 +159,7 @@ const langs = langKeys.map(key => {
       <h2 class="text-2xl font-bold text-white mb-4">{sdk.cta}</h2>
       <div class="flex justify-center gap-4">
         <a href={p('/download')} class="h-10 px-6 rounded-lg bg-white text-black font-semibold hover:bg-slate-200 transition-colors flex items-center">{sdk.ctaStart}</a>
-        <a href={p('/pricing')} class="h-10 px-6 rounded-lg border border-white/10 text-slate-300 hover:text-white hover:border-white transition-colors flex items-center">{sdk.ctaDocs}</a>
+        <a href={docsUrl} target="_blank" rel="noopener" class="h-10 px-6 rounded-lg border border-white/10 text-slate-300 hover:text-white hover:border-white transition-colors flex items-center">{sdk.ctaDocs}</a>
       </div>
     </div>
   </div>
