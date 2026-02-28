@@ -1,10 +1,10 @@
 ---
-import { getLocaleFromUrl, getTranslations } from '../i18n';
+import { getLocaleFromUrl, getTranslations, getLocalizedPath } from '../i18n';
 
 const locale = getLocaleFromUrl(Astro.url);
 const t = getTranslations(locale);
 const df = t.aiDataFlow;
-const prefix = locale === 'zh' ? '' : '/en';
+const p = (path: string) => getLocalizedPath(path, locale);
 const logColorMap: Record<string, string> = { INFO: 'text-green-500', DEBUG: 'text-blue-500', TRACE: 'text-purple-500' };
 ---
 
@@ -232,7 +232,7 @@ db = talon_db.<span class="text-accent">connect</span>(<span class="text-green-4
         <ul class="space-y-2">
           {df.docLinks.map((link: string) => (
             <li>
-              <a class="flex items-center justify-between text-xs text-slate-400 hover:text-primary transition-colors group" href={`${prefix}/quickstart`}>
+              <a class="flex items-center justify-between text-xs text-slate-400 hover:text-primary transition-colors group" href={p('/quickstart')}>
                 <span>{link}</span>
                 <span class="material-symbols-outlined text-[14px] group-hover:translate-x-1 transition-transform">chevron_right</span>
               </a>

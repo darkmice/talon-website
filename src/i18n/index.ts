@@ -6,17 +6,26 @@ const translations: Record<string, typeof zh> = { zh, en };
 export type Locale = 'zh' | 'en';
 export type TranslationKeys = typeof zh;
 
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
 export function getTranslations(locale: string): TranslationKeys {
   return translations[locale] ?? translations.zh;
 }
 
 export function getLocaleFromUrl(url: URL): Locale {
-  const [, locale] = url.pathname.split('/');
+  const pathname = url.pathname.replace(base, '');
+  const [, locale] = pathname.split('/');
   if (locale === 'en') return 'en';
   return 'zh';
 }
 
 export function getLocalizedPath(path: string, locale: Locale): string {
-  if (locale === 'zh') return path;
-  return `/en${path}`;
+  if (locale === 'zh') return `${base}${path}`;
+  return `${base}/en${path}`;
+}
+
+export function getAltPath(url: URL, locale: Locale): string {
+  const pathname = url.pathname.replace(base, '');
+  if (locale === 'zh') return `${base}/en${pathname}`;
+  return `${base}${pathname.replace(/^\/en/, '') || '/'}`;
 }

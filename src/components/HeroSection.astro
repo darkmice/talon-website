@@ -1,9 +1,9 @@
 ---
-import { getLocaleFromUrl, getTranslations } from '../i18n';
+import { getLocaleFromUrl, getTranslations, getLocalizedPath } from '../i18n';
 
 const locale = getLocaleFromUrl(Astro.url);
 const t = getTranslations(locale);
-const p = (path: string) => locale === 'zh' ? path : `/en${path}`;
+const p = (path: string) => getLocalizedPath(path, locale);
 ---
 
 <section class="relative min-h-[80vh] pt-24 pb-12 flex flex-col items-center justify-center overflow-hidden">

@@ -1,10 +1,10 @@
 ---
-import { getLocaleFromUrl, getTranslations } from '../i18n';
+import { getLocaleFromUrl, getTranslations, getLocalizedPath } from '../i18n';
 
 const locale = getLocaleFromUrl(Astro.url);
 const t = getTranslations(locale);
 const rg = t.ragPage;
-const p = (path: string) => locale === 'zh' ? path : `/en${path}`;
+const p = (path: string) => getLocalizedPath(path, locale);
 ---
 
 <main class="flex-grow pt-32 pb-12 relative">

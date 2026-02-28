@@ -1,15 +1,14 @@
 ---
-import { getLocaleFromUrl, getTranslations } from '../i18n';
+import { getLocaleFromUrl, getTranslations, getLocalizedPath, getAltPath } from '../i18n';
 
 const locale = getLocaleFromUrl(Astro.url);
 const t = getTranslations(locale);
 const altLabel = locale === 'zh' ? 'EN' : '中文';
-const altPath = locale === 'zh'
-  ? `/en${Astro.url.pathname}`
-  : Astro.url.pathname.replace(/^\/en/, '') || '/';
-const p = (path: string) => locale === 'zh' ? path : `/en${path}`;
+const altPath = getAltPath(Astro.url, locale);
+const p = (path: string) => getLocalizedPath(path, locale);
 
-const pathname = Astro.url.pathname.replace(/^\/en/, '') || '/';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const pathname = Astro.url.pathname.replace(base, '').replace(/^\/en/, '') || '/';
 const isActive = (path: string) => {
   if (path === '/') return pathname === '/';
   return pathname.startsWith(path);
