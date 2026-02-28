@@ -20,10 +20,20 @@ const docsUrl = getDocsUrl('/engines/ai', locale);
   .animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
 </style>
 
-<main class="relative min-h-screen pt-32 flex flex-col lg:flex-row">
+<main class="relative min-h-screen pt-32 pb-12">
   <div class="absolute inset-0 bg-grid-pattern cyber-grid opacity-30 pointer-events-none z-0"></div>
   <div class="absolute inset-0 bg-radial-glow pointer-events-none z-0"></div>
 
+  <!-- Breadcrumb -->
+  <div class="container mx-auto px-4 max-w-7xl relative z-10 mb-8">
+    <div class="flex items-center gap-2 text-sm text-slate-400">
+      <a class="hover:text-primary transition-colors" href={p('/use-cases')}>{am.breadcrumb}</a>
+      <span class="material-symbols-outlined text-xs">chevron_right</span>
+      <span class="text-white">{am.breadcrumbSub}</span>
+    </div>
+  </div>
+
+  <div class="flex flex-col lg:flex-row relative">
   <!-- Left: Orbit Visualization -->
   <div class="flex-1 relative z-10 p-4 lg:p-10 flex items-center justify-center overflow-hidden min-h-[600px] lg:min-h-auto">
     <div class="relative w-full max-w-4xl aspect-square lg:aspect-video flex items-center justify-center">
@@ -170,4 +180,21 @@ memory = db.<span class="text-blue-400">ai</span>().<span class="text-yellow-300
       </a>
     </div>
   </aside>
+  </div>
+
+  <!-- CTA -->
+  <div class="container mx-auto px-4 max-w-7xl relative z-10 mt-12">
+    <div class="rounded-3xl bg-gradient-to-r from-primary/20 via-surface-dark to-surface-dark border border-white/10 p-8 md:p-12 relative overflow-hidden">
+      <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/10 to-transparent pointer-events-none"></div>
+      <div class="relative z-10 flex flex-col md:flex-row justify-between items-center gap-8">
+        <div class="max-w-xl">
+          <h2 class="text-2xl md:text-3xl font-bold text-white mb-3">{am.cta}</h2>
+        </div>
+        <div class="flex gap-4">
+          <a class="px-6 py-3 rounded-lg bg-white text-slate-900 font-bold hover:bg-slate-200 transition-colors" href={p('/download')}>{am.ctaStart}</a>
+          <a class="px-6 py-3 rounded-lg border border-white/20 text-white font-medium hover:bg-white/5 transition-colors" href={docsUrl} target="_blank" rel="noopener">{am.ctaDocs}</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </main>

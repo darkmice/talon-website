@@ -1,10 +1,11 @@
 ---
-import { getLocaleFromUrl, getTranslations, getLocalizedPath } from '../i18n';
+import { getLocaleFromUrl, getTranslations, getLocalizedPath, getDocsUrl } from '../i18n';
 
 const locale = getLocaleFromUrl(Astro.url);
 const t = getTranslations(locale);
 const rg = t.ragPage;
 const p = (path: string) => getLocalizedPath(path, locale);
+const docsUrl = getDocsUrl('/engines/vector', locale);
 ---
 
 <main class="flex-grow pt-32 pb-12 relative">
@@ -12,16 +13,23 @@ const p = (path: string) => getLocalizedPath(path, locale);
   <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/5 blur-[120px] rounded-full pointer-events-none"></div>
 
   <div class="container mx-auto px-4 max-w-7xl relative z-10">
-    <!-- Hero -->
-    <div class="text-center mb-16">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-lighter border border-white/10 text-accent text-xs font-semibold uppercase tracking-wider mb-4">
-        <span class="material-symbols-outlined text-[14px]">compare_arrows</span>
-        {rg.badge}
+    <!-- Breadcrumb -->
+    <div class="mb-12">
+      <div class="flex items-center gap-2 text-sm text-slate-400 mb-6">
+        <a class="hover:text-primary transition-colors" href={p('/use-cases')}>{rg.breadcrumb}</a>
+        <span class="material-symbols-outlined text-xs">chevron_right</span>
+        <span class="text-white">{rg.breadcrumbSub}</span>
       </div>
-      <h1 class="text-4xl md:text-5xl font-black text-white mb-4">
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-white to-purple-400">{rg.title}</span>
-      </h1>
-      <p class="text-slate-400 max-w-2xl mx-auto">{rg.subtitle}</p>
+      <div class="text-center">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-lighter border border-white/10 text-accent text-xs font-semibold uppercase tracking-wider mb-4">
+          <span class="material-symbols-outlined text-[14px]">compare_arrows</span>
+          {rg.badge}
+        </div>
+        <h1 class="text-4xl md:text-5xl font-black text-white mb-4">
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-white to-purple-400">{rg.title}</span>
+        </h1>
+        <p class="text-slate-400 max-w-2xl mx-auto">{rg.subtitle}</p>
+      </div>
     </div>
 
     <div class="grid grid-cols-12 gap-8">
@@ -210,6 +218,20 @@ const p = (path: string) => getLocalizedPath(path, locale);
     alpha =&gt; <span class="text-orange-400">0.5</span>  <span class="text-slate-500">-- balance keyword vs semantic weight</span>
 );</code></pre>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="mt-16 rounded-3xl bg-gradient-to-r from-primary/20 via-surface-dark to-surface-dark border border-white/10 p-8 md:p-12 relative overflow-hidden">
+      <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/10 to-transparent pointer-events-none"></div>
+      <div class="relative z-10 flex flex-col md:flex-row justify-between items-center gap-8">
+        <div class="max-w-xl">
+          <h2 class="text-2xl md:text-3xl font-bold text-white mb-3">{rg.cta}</h2>
+        </div>
+        <div class="flex gap-4">
+          <a class="px-6 py-3 rounded-lg bg-white text-slate-900 font-bold hover:bg-slate-200 transition-colors" href={p('/download')}>{rg.ctaStart}</a>
+          <a class="px-6 py-3 rounded-lg border border-white/20 text-white font-medium hover:bg-white/5 transition-colors" href={docsUrl} target="_blank" rel="noopener">{rg.ctaDocs}</a>
         </div>
       </div>
     </div>

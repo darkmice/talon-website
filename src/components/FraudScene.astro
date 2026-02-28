@@ -1,10 +1,11 @@
 ---
-import { getLocaleFromUrl, getTranslations, getLocalizedPath } from '../i18n';
+import { getLocaleFromUrl, getTranslations, getLocalizedPath, getDocsUrl } from '../i18n';
 
 const locale = getLocaleFromUrl(Astro.url);
 const t = getTranslations(locale);
 const fr = t.fraudPage;
 const p = (path: string) => getLocalizedPath(path, locale);
+const docsUrl = getDocsUrl('/engines/kv', locale);
 ---
 
 <style>
@@ -18,6 +19,13 @@ const p = (path: string) => getLocalizedPath(path, locale);
   <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(circle at center, rgba(220, 38, 38, 0.1) 0%, rgba(5, 5, 5, 0) 70%);"></div>
 
   <div class="relative z-10 container mx-auto px-4 max-w-[1600px] flex-1 flex flex-col gap-6">
+    <!-- Breadcrumb -->
+    <div class="flex items-center gap-2 text-sm text-slate-400">
+      <a class="hover:text-primary transition-colors" href={p('/use-cases')}>{fr.breadcrumb}</a>
+      <span class="material-symbols-outlined text-xs">chevron_right</span>
+      <span class="text-white">{fr.breadcrumbSub}</span>
+    </div>
+
     <!-- Header Stats -->
     <div class="flex flex-col md:flex-row justify-between items-end gap-6 border-b border-white/5 pb-6">
       <div>
@@ -171,6 +179,20 @@ const p = (path: string) => getLocalizedPath(path, locale);
               </div>
             ))}
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="mt-4 rounded-3xl bg-gradient-to-r from-primary/20 via-surface-dark to-surface-dark border border-white/10 p-8 md:p-12 relative overflow-hidden">
+      <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/10 to-transparent pointer-events-none"></div>
+      <div class="relative z-10 flex flex-col md:flex-row justify-between items-center gap-8">
+        <div class="max-w-xl">
+          <h2 class="text-2xl md:text-3xl font-bold text-white mb-3">{fr.cta}</h2>
+        </div>
+        <div class="flex gap-4">
+          <a class="px-6 py-3 rounded-lg bg-white text-slate-900 font-bold hover:bg-slate-200 transition-colors" href={p('/download')}>{fr.ctaStart}</a>
+          <a class="px-6 py-3 rounded-lg border border-white/20 text-white font-medium hover:bg-white/5 transition-colors" href={docsUrl} target="_blank" rel="noopener">{fr.ctaDocs}</a>
         </div>
       </div>
     </div>
