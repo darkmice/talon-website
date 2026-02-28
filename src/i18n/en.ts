@@ -517,7 +517,7 @@ export default {
       arch1: 'x86_64',
       arch2: 'AArch64',
       btn: 'Download .tar.gz',
-      curl: 'curl -sfL https://talon.sh/install | sh',
+      curl: 'curl -fsSL https://raw.githubusercontent.com/darkmice/talon/main/install.sh | sh',
     },
     windows: {
       name: 'Windows',
