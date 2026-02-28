@@ -77,6 +77,10 @@ const altURL = new URL(altPath, Astro.site);
 </html>
 
 <style is:global>
+  ::selection {
+    background: rgba(55, 19, 236, 0.4);
+    color: #fff;
+  }
   .cyber-grid {
     background-size: 40px 40px;
     mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
