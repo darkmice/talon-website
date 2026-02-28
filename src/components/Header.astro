@@ -63,7 +63,7 @@ const navLinks = [
   </div>
 
   <!-- Mobile menu overlay -->
-  <div id="mobile-menu" class="hidden lg:hidden absolute top-16 left-0 w-full bg-[#0a0a0f]/95 backdrop-blur-lg border-b border-white/10">
+  <div id="mobile-menu" class="hidden lg:hidden fixed top-16 left-0 w-full h-[calc(100vh-4rem)] bg-[#0a0a0f] border-b border-white/10 overflow-y-auto">
     <nav class="flex flex-col px-6 py-4 space-y-1">
       {navLinks.map(link => (
         <a class={`px-4 py-3 rounded-lg text-sm font-medium transition-colors ${isActive(link.href) ? 'text-white bg-primary/10 border-l-2 border-primary' : 'text-slate-300 hover:text-white hover:bg-white/5'}`} href={p(link.href)}>
