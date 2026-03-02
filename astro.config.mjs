@@ -4,8 +4,7 @@ import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://darkmice.github.io',
-  base: '/talon-website',
+  site: 'https://www.talon.net.cn',
   i18n: {
     defaultLocale: 'zh',
     locales: ['zh', 'en'],
