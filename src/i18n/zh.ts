@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2026 Talon Contributors
+ * Author: dark.lijin@gmail.com
+ * Licensed under the Talon Community Dual License Agreement.
+ * See the LICENSE file in the project root for full license information.
+ */
 export default {
   meta: {
     title: 'Talon — AI 智能体的数字基座',
@@ -57,7 +63,7 @@ export default {
     ai: {
       badge: 'Core Engine',
       name: 'AI 引擎',
-      desc: '原生 Session/Context/Memory/Trace/RAG/Agent 抽象，为 LLM 应用提供完整数据原语。',
+      desc: '原生 Session/Context/Memory/RAG/Agent/Trace + LLM Provider 配置、自动 Embedding/摘要、精确 Token 计数。',
     },
     mq: {
       name: '消息队列',
@@ -93,11 +99,11 @@ export default {
     exploreAll: '探索所有特性',
     memory: {
       title: '长期记忆',
-      desc: '轻松持久化智能体状态。存储会话历史、用户偏好和上下文，内置摘要钩子。',
+      desc: '轻松持久化智能体状态。通过配置 LLM Provider 自动生成 Embedding，语义搜索自动生成查询向量。',
     },
     session: {
       title: '会话管理',
-      desc: '以毫秒级延迟处理数百万并发智能体会话。自动会话过期和状态恢复。',
+      desc: '以毫秒级延迟处理数百万并发智能体会话。智能上下文窗口，超长对话时自动触发摘要压缩。',
     },
     rag: {
       title: '混合检索 (Hybrid RAG)',
@@ -336,13 +342,13 @@ export default {
     ai: {
       section: 'AI 原生能力',
       badge: 'Agent Ready',
-      sessions: { title: '会话管理 (Sessions)', desc: 'AiEngine 原生 Session CRUD，支持 TTL 自动过期、标签分组、归档导出。基于 KV 引擎持久化。' },
-      memory: { title: '长期记忆 (Memory)', desc: '向量化存储记忆条目，支持语义检索、去重检测、TTL 自动清理。跨会话记忆关联。' },
-      token: { title: 'Context / Trace', desc: '时序引擎记录对话上下文和调用链路。支持 token 统计、性能报告、RAG 文档版本管理。' },
-      sessionsBar1: 'State Preservation',
-      sessionsBar2: 'Auto-Expiry',
-      memoryTags: ['Episodic', 'Semantic'],
-      tokenOptimizer: 'Optimizer: LRU / Importance',
+      sessions: { title: '会话 & LLM 配置', desc: 'Session CRUD，TTL 自动过期、标签分组、归档导出。配置 LLM Provider（OpenAI/DeepSeek/Ollama）用于自动摘要和自动 Embedding。' },
+      memory: { title: '自动 Embedding 记忆', desc: '通过已配置的 Provider 自动生成 Embedding。语义检索、去重检测、TTL 自动清理，无需手动计算向量。' },
+      token: { title: '智能上下文 & Token 计数', desc: '智能上下文窗口自动摘要压缩。tiktoken BPE 精确 Token 计数。执行追踪与 RAG 文档版本管理。' },
+      sessionsBar1: 'LLM Provider 配置',
+      sessionsBar2: '自动过期',
+      memoryTags: ['自动 Embed', '语义'],
+      tokenOptimizer: '智能：自动摘要 / 上下文压缩',
     },
     benchTitle: '性能基准测试',
     benchmarks: [
@@ -517,7 +523,7 @@ export default {
       arch1: 'x86_64',
       arch2: 'AArch64',
       btn: '下载 .tar.gz',
-      curl: 'curl -fsSL https://raw.githubusercontent.com/darkmice/talon/main/install.sh | sh',
+      curl: 'curl -fsSL https://raw.githubusercontent.com/darkmice/talon-core/main/install.sh | sh',
     },
     windows: {
       name: 'Windows',
@@ -565,7 +571,7 @@ export default {
       blog: '博客',
       contact: '联系我们',
     },
-    copyright: '© 2025 Talon. 保留所有权利。',
+    copyright: '© 2024–2026 Talon Contributors. 保留所有权利。',
     privacy: '隐私',
     terms: '条款',
     security: '安全',
@@ -574,7 +580,7 @@ export default {
     title: 'AI 记忆引擎',
     titleSep: '/',
     titleSub: '数据流向图',
-    desc: '从用户消息到持久化记忆：AiEngine 协调 KV、时序、向量三引擎，实现 Session → Context → Memory → RAG 全链路。',
+    desc: '从用户消息到持久化记忆：AiEngine 协调 KV、时序、向量三引擎。支持 LLM Provider 配置、自动 Embedding、自动摘要和智能上下文压缩。',
     exportPng: '导出 PNG',
     viewLogs: '查看日志',
     engineCore: 'TALON AI ENGINE',
