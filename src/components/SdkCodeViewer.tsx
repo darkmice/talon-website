@@ -17,7 +17,7 @@ const langs: Record<string, LangConfig> = {
 <span class="tc-kw">import</span> (
     <span class="tc-str">"fmt"</span>
     <span class="tc-str">"log"</span>
-    talon <span class="tc-str">"github.com/darkmice/talon/sdk/go"</span>
+    talon <span class="tc-str">"github.com/darkmice/talon-sdk/go"</span>
 )
 
 <span class="tc-ty">func</span> <span class="tc-fn">main</span>() {
@@ -282,11 +282,10 @@ export default function SdkCodeViewer({ tabs, examples, linkLabel }: Props) {
             <button
               key={tab}
               onClick={() => setActiveTab(i)}
-              className={`flex items-center gap-2 pb-4 text-sm font-medium transition-colors whitespace-nowrap ${
-                i === activeTab
+              className={`flex items-center gap-2 pb-4 text-sm font-medium transition-colors whitespace-nowrap ${i === activeTab
                   ? 'text-white tab-active'
                   : 'text-slate-400 hover:text-white'
-              }`}
+                }`}
             >
               {tab}
             </button>
@@ -305,11 +304,10 @@ export default function SdkCodeViewer({ tabs, examples, linkLabel }: Props) {
             {examples.map((ex, i) => (
               <div
                 key={ex}
-                className={`w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all ${
-                  i === 0
+                className={`w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all ${i === 0
                     ? 'text-white bg-[#16162a] border border-[#3713ec]/30 flex items-center justify-between'
                     : 'text-slate-400'
-                }`}
+                  }`}
               >
                 {ex}
                 {i === 0 && (

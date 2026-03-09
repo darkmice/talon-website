@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2026 Talon Contributors
+ * Author: dark.lijin@gmail.com
+ * Licensed under the Talon Community Dual License Agreement.
+ * See the LICENSE file in the project root for full license information.
+ */
 export interface SdkExample {
   file: string;
   code: string;
@@ -8,13 +14,14 @@ export interface SdkExample {
 // --- Go Examples (Native SDK) ---
 const go: SdkExample[] = [
   // Ex0: talon_execute JSON 综合
-  { file: 'main.go', runCmd: '$ go run main.go',
+  {
+    file: 'main.go', runCmd: '$ go run main.go',
     code: `<span class="tc-kw">package</span> main
 
 <span class="tc-kw">import</span> (
     <span class="tc-str">"fmt"</span>
     <span class="tc-str">"log"</span>
-    talon <span class="tc-str">"github.com/darkmice/talon/sdk/go"</span>
+    talon <span class="tc-str">"github.com/darkmice/talon-sdk/go"</span>
 )
 
 <span class="tc-ty">func</span> <span class="tc-fn">main</span>() &#123;
@@ -43,12 +50,13 @@ const go: SdkExample[] = [
 <span class="tc-ok">Process finished with exit code 0</span>` },
 
   // Ex1: SQL 查询
-  { file: 'sql_demo.go', runCmd: '$ go run sql_demo.go',
+  {
+    file: 'sql_demo.go', runCmd: '$ go run sql_demo.go',
     code: `<span class="tc-kw">package</span> main
 
 <span class="tc-kw">import</span> (
     <span class="tc-str">"fmt"</span>
-    talon <span class="tc-str">"github.com/darkmice/talon/sdk/go"</span>
+    talon <span class="tc-str">"github.com/darkmice/talon-sdk/go"</span>
 )
 
 <span class="tc-ty">func</span> <span class="tc-fn">main</span>() &#123;
@@ -77,12 +85,13 @@ avg=91.8
 <span class="tc-ok">Process finished with exit code 0</span>` },
 
   // Ex2: KV SET/GET
-  { file: 'kv_demo.go', runCmd: '$ go run kv_demo.go',
+  {
+    file: 'kv_demo.go', runCmd: '$ go run kv_demo.go',
     code: `<span class="tc-kw">package</span> main
 
 <span class="tc-kw">import</span> (
     <span class="tc-str">"fmt"</span>
-    talon <span class="tc-str">"github.com/darkmice/talon/sdk/go"</span>
+    talon <span class="tc-str">"github.com/darkmice/talon-sdk/go"</span>
 )
 
 <span class="tc-ty">func</span> <span class="tc-fn">main</span>() &#123;
@@ -112,12 +121,13 @@ GET: &#123;"name":"Alice"&#125;
 <span class="tc-ok">Process finished with exit code 0</span>` },
 
   // Ex3: 向量 KNN 搜索
-  { file: 'vec_demo.go', runCmd: '$ go run vec_demo.go',
+  {
+    file: 'vec_demo.go', runCmd: '$ go run vec_demo.go',
     code: `<span class="tc-kw">package</span> main
 
 <span class="tc-kw">import</span> (
     <span class="tc-str">"fmt"</span>
-    talon <span class="tc-str">"github.com/darkmice/talon/sdk/go"</span>
+    talon <span class="tc-str">"github.com/darkmice/talon-sdk/go"</span>
 )
 
 <span class="tc-ty">func</span> <span class="tc-fn">main</span>() &#123;
@@ -144,12 +154,13 @@ id=doc-1 score=0.9945
 <span class="tc-ok">Process finished with exit code 0</span>` },
 
   // Ex4: AI 会话管理
-  { file: 'ai_demo.go', runCmd: '$ go run ai_demo.go',
+  {
+    file: 'ai_demo.go', runCmd: '$ go run ai_demo.go',
     code: `<span class="tc-kw">package</span> main
 
 <span class="tc-kw">import</span> (
     <span class="tc-str">"fmt"</span>
-    talon <span class="tc-str">"github.com/darkmice/talon/sdk/go"</span>
+    talon <span class="tc-str">"github.com/darkmice/talon-sdk/go"</span>
 )
 
 <span class="tc-ty">func</span> <span class="tc-fn">main</span>() &#123;
@@ -178,13 +189,14 @@ id=doc-1 score=0.9945
 <span class="tc-ok">Process finished with exit code 0</span>` },
 
   // Ex5: 时序写入查询
-  { file: 'ts_demo.go', runCmd: '$ go run ts_demo.go',
+  {
+    file: 'ts_demo.go', runCmd: '$ go run ts_demo.go',
     code: `<span class="tc-kw">package</span> main
 
 <span class="tc-kw">import</span> (
     <span class="tc-str">"fmt"</span>
     <span class="tc-str">"time"</span>
-    talon <span class="tc-str">"github.com/darkmice/talon/sdk/go"</span>
+    talon <span class="tc-str">"github.com/darkmice/talon-sdk/go"</span>
 )
 
 <span class="tc-ty">func</span> <span class="tc-fn">main</span>() &#123;
@@ -213,7 +225,8 @@ Avg temp: 23.00°C
 
 // --- Rust Examples (Native SDK) ---
 const rust: SdkExample[] = [
-  { file: 'main.rs', runCmd: '$ cargo run --release',
+  {
+    file: 'main.rs', runCmd: '$ cargo run --release',
     code: `<span class="tc-kw">use</span> talon::&#123;Store, sql, kv::KvEngine&#125;;
 
 <span class="tc-ty">fn</span> <span class="tc-fn">main</span>() -&gt; <span class="tc-ty">Result</span>&lt;(), talon::Error&gt; &#123;
@@ -234,7 +247,8 @@ const rust: SdkExample[] = [
 [[1, "Alice", 95.5]]
 
 <span class="tc-ok">Process finished with exit code 0</span>` },
-  { file: 'sql_demo.rs', runCmd: '$ cargo run --release',
+  {
+    file: 'sql_demo.rs', runCmd: '$ cargo run --release',
     code: `<span class="tc-kw">use</span> talon::&#123;Store, sql&#125;;
 
 <span class="tc-ty">fn</span> <span class="tc-fn">main</span>() -&gt; <span class="tc-ty">Result</span>&lt;(), talon::Error&gt; &#123;
@@ -256,7 +270,8 @@ const rust: SdkExample[] = [
 avg: [[91.75]]
 
 <span class="tc-ok">Process finished with exit code 0</span>` },
-  { file: 'kv_demo.rs', runCmd: '$ cargo run --release',
+  {
+    file: 'kv_demo.rs', runCmd: '$ cargo run --release',
     code: `<span class="tc-kw">use</span> talon::&#123;Store, kv::KvEngine&#125;;
 
 <span class="tc-ty">fn</span> <span class="tc-fn">main</span>() -&gt; <span class="tc-ty">Result</span>&lt;(), talon::Error&gt; &#123;
@@ -278,7 +293,8 @@ Some(b"&#123;\\"name\\":\\"Alice\\"&#125;")
 Some(b"&#123;\\"name\\":\\"Bob\\"&#125;")
 
 <span class="tc-ok">Process finished with exit code 0</span>` },
-  { file: 'vec_demo.rs', runCmd: '$ cargo run --release',
+  {
+    file: 'vec_demo.rs', runCmd: '$ cargo run --release',
     code: `<span class="tc-kw">use</span> talon::&#123;Store, vector::VectorEngine&#125;;
 
 <span class="tc-ty">fn</span> <span class="tc-fn">main</span>() -&gt; <span class="tc-ty">Result</span>&lt;(), talon::Error&gt; &#123;
@@ -298,7 +314,8 @@ id=doc-3 score=0.9987
 id=doc-1 score=0.9945
 
 <span class="tc-ok">Process finished with exit code 0</span>` },
-  { file: 'ai_demo.rs', runCmd: '$ cargo run --release',
+  {
+    file: 'ai_demo.rs', runCmd: '$ cargo run --release',
     code: `<span class="tc-kw">use</span> talon::&#123;Store, ai::AiEngine&#125;;
 <span class="tc-kw">use</span> std::collections::BTreeMap;
 
@@ -322,7 +339,8 @@ id=doc-1 score=0.9945
 [assistant] Use kv.set() and kv.get().
 
 <span class="tc-ok">Process finished with exit code 0</span>` },
-  { file: 'ts_demo.rs', runCmd: '$ cargo run --release',
+  {
+    file: 'ts_demo.rs', runCmd: '$ cargo run --release',
     code: `<span class="tc-kw">use</span> talon::&#123;Store, ts::&#123;TsEngine, DataPoint&#125;&#125;;
 <span class="tc-kw">use</span> std::collections::BTreeMap;
 
@@ -354,23 +372,35 @@ function ffiEx(
   file: string, runCmd: string
 ): SdkExample[] {
   const cmds = [
-    { c: 'SQL + KV + Execute 综合示例', j: `&#123;"module":"sql","action":"query","params":&#123;"sql":"SELECT * FROM users LIMIT 10"&#125;&#125;`,
-      o: `<span class="tc-ac">&#123;"ok":true,"data":[[1,"Alice",95.5]]&#125;</span>\n\n<span class="tc-ok">Process finished with exit code 0</span>` },
-    { c: 'SQL 建表 + 插入 + 查询', j: `&#123;"module":"sql","action":"exec","params":&#123;"sql":"CREATE TABLE users (id INT PK, name TEXT, score REAL)"&#125;&#125;`,
+    {
+      c: 'SQL + KV + Execute 综合示例', j: `&#123;"module":"sql","action":"query","params":&#123;"sql":"SELECT * FROM users LIMIT 10"&#125;&#125;`,
+      o: `<span class="tc-ac">&#123;"ok":true,"data":[[1,"Alice",95.5]]&#125;</span>\n\n<span class="tc-ok">Process finished with exit code 0</span>`
+    },
+    {
+      c: 'SQL 建表 + 插入 + 查询', j: `&#123;"module":"sql","action":"exec","params":&#123;"sql":"CREATE TABLE users (id INT PK, name TEXT, score REAL)"&#125;&#125;`,
       j2: `&#123;"module":"sql","action":"query","params":&#123;"sql":"SELECT * FROM users"&#125;&#125;`,
-      o: `&#123;"ok":true&#125;\n&#123;"ok":true,"data":[[1,"Alice",95.5]]&#125;\n\n<span class="tc-ok">Process finished with exit code 0</span>` },
-    { c: 'KV SET/GET 操作', j: `&#123;"module":"kv","action":"set","params":&#123;"key":"user:1001","value":"&#123;\\\\"name\\\\":\\\\"Alice\\\\"&#125;","ttl":3600&#125;&#125;`,
+      o: `&#123;"ok":true&#125;\n&#123;"ok":true,"data":[[1,"Alice",95.5]]&#125;\n\n<span class="tc-ok">Process finished with exit code 0</span>`
+    },
+    {
+      c: 'KV SET/GET 操作', j: `&#123;"module":"kv","action":"set","params":&#123;"key":"user:1001","value":"&#123;\\\\"name\\\\":\\\\"Alice\\\\"&#125;","ttl":3600&#125;&#125;`,
       j2: `&#123;"module":"kv","action":"get","params":&#123;"key":"user:1001"&#125;&#125;`,
-      o: `&#123;"ok":true&#125;\n&#123;"ok":true,"data":"&#123;\\\\"name\\\\":\\\\"Alice\\\\"&#125;"&#125;\n\n<span class="tc-ok">Process finished with exit code 0</span>` },
-    { c: '向量 KNN 搜索', j: `&#123;"module":"vector","action":"insert","params":&#123;"collection":"emb","id":"doc-1","vector":[0.1,0.8,0.3]&#125;&#125;`,
+      o: `&#123;"ok":true&#125;\n&#123;"ok":true,"data":"&#123;\\\\"name\\\\":\\\\"Alice\\\\"&#125;"&#125;\n\n<span class="tc-ok">Process finished with exit code 0</span>`
+    },
+    {
+      c: '向量 KNN 搜索', j: `&#123;"module":"vector","action":"insert","params":&#123;"collection":"emb","id":"doc-1","vector":[0.1,0.8,0.3]&#125;&#125;`,
       j2: `&#123;"module":"vector","action":"search","params":&#123;"collection":"emb","vector":[0.1,0.8,0.3],"top_k":2&#125;&#125;`,
-      o: `&#123;"ok":true&#125;\n&#123;"ok":true,"data":[&#123;"id":"doc-1","score":1.0&#125;]&#125;\n\n<span class="tc-ok">Process finished with exit code 0</span>` },
-    { c: 'AI 会话管理', j: `&#123;"module":"ai","action":"create_session","params":&#123;"user_id":"user-abc","ttl":7200&#125;&#125;`,
+      o: `&#123;"ok":true&#125;\n&#123;"ok":true,"data":[&#123;"id":"doc-1","score":1.0&#125;]&#125;\n\n<span class="tc-ok">Process finished with exit code 0</span>`
+    },
+    {
+      c: 'AI 会话管理', j: `&#123;"module":"ai","action":"create_session","params":&#123;"user_id":"user-abc","ttl":7200&#125;&#125;`,
       j2: `&#123;"module":"ai","action":"add_context","params":&#123;"session_id":"user-abc","role":"user","content":"Hello"&#125;&#125;`,
-      o: `&#123;"ok":true,"session_id":"user-abc"&#125;\n&#123;"ok":true&#125;\n\n<span class="tc-ok">Process finished with exit code 0</span>` },
-    { c: '时序写入 + 聚合查询', j: `&#123;"module":"ts","action":"write","params":&#123;"metric":"sensors","tags":&#123;"device":"temp-01"&#125;,"fields":&#123;"value":23.5&#125;&#125;&#125;`,
+      o: `&#123;"ok":true,"session_id":"user-abc"&#125;\n&#123;"ok":true&#125;\n\n<span class="tc-ok">Process finished with exit code 0</span>`
+    },
+    {
+      c: '时序写入 + 聚合查询', j: `&#123;"module":"ts","action":"write","params":&#123;"metric":"sensors","tags":&#123;"device":"temp-01"&#125;,"fields":&#123;"value":23.5&#125;&#125;&#125;`,
       j2: `&#123;"module":"ts","action":"aggregate","params":&#123;"metric":"sensors","fn":"AVG","field":"value","range":"-1h"&#125;&#125;`,
-      o: `&#123;"ok":true&#125;\n&#123;"ok":true,"data":23.50&#125;\n\n<span class="tc-ok">Process finished with exit code 0</span>` },
+      o: `&#123;"ok":true&#125;\n&#123;"ok":true,"data":23.50&#125;\n\n<span class="tc-ok">Process finished with exit code 0</span>`
+    },
   ];
   return cmds.map((cmd, i) => ({
     file: i === 0 ? file : file.replace(/\./, `_ex${i}.`),
