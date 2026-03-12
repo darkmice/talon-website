@@ -63,7 +63,7 @@ export default {
     ai: {
       badge: 'Core Engine',
       name: 'AI 引擎',
-      desc: '原生 Session/Context/Memory/RAG/Agent/Trace + LLM Provider 配置、自动 Embedding/摘要、精确 Token 计数。',
+      desc: '原生 Session/Context/Memory/RAG/Agent/Trace + Hybrid Recall Pipeline（BM25+Vec+Temporal+Rerank+Graph）、自动 Embedding/摘要。',
     },
     mq: {
       name: '消息队列',
@@ -342,7 +342,7 @@ export default {
       section: 'AI 原生能力',
       badge: 'Agent Ready',
       sessions: { title: '会话 & LLM 配置', desc: 'Session CRUD，TTL 自动过期、标签分组、归档导出。配置 LLM Provider（OpenAI/DeepSeek/Ollama）用于自动摘要和自动 Embedding。' },
-      memory: { title: '自动 Embedding 记忆', desc: '通过已配置的 Provider 自动生成 Embedding。语义检索、去重检测、TTL 自动清理，无需手动计算向量。' },
+      memory: { title: '自动 Embedding 记忆', desc: '通过已配置的 Provider 自动生成 Embedding。Hybrid Recall Pipeline：BM25+向量双写、时间衰减、Graph 扩展、LLM Rerank。' },
       token: { title: '智能上下文 & Token 计数', desc: '智能上下文窗口自动摘要压缩。tiktoken BPE 精确 Token 计数。执行追踪与 RAG 文档版本管理。' },
       sessionsBar1: 'LLM Provider 配置',
       sessionsBar2: '自动过期',
@@ -579,7 +579,7 @@ export default {
     title: 'AI 记忆引擎',
     titleSep: '/',
     titleSub: '数据流向图',
-    desc: '从用户消息到持久化记忆：AiEngine 协调 KV、时序、向量三引擎。支持 LLM Provider 配置、自动 Embedding、自动摘要和智能上下文压缩。',
+    desc: '从用户消息到持久化记忆：AiEngine 协调 KV、时序、向量、FTS、图五引擎。v2.1 Hybrid Recall Pipeline：BM25+Vec+Temporal+Rerank+Graph 全栈检索。',
     exportPng: '导出 PNG',
     viewLogs: '查看日志',
     engineCore: 'TALON AI ENGINE',

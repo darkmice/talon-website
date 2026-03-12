@@ -63,7 +63,7 @@ export default {
     ai: {
       badge: 'Core Engine',
       name: 'AI Engine',
-      desc: 'Native Session/Context/Memory/RAG/Agent/Trace + LLM Provider config, Auto-Embedding, Auto-Summarize, Token Count.',
+      desc: 'Native Session/Context/Memory/RAG/Agent/Trace + Hybrid Recall Pipeline (BM25+Vec+Temporal+Rerank+Graph), Auto-Embedding, Auto-Summarize.',
     },
     mq: {
       name: 'Message Queue',
@@ -342,7 +342,7 @@ export default {
       section: 'AI-Native Capabilities',
       badge: 'Agent Ready',
       sessions: { title: 'Session & LLM Config', desc: 'Session CRUD with TTL, tags, archive. Configure LLM Providers (OpenAI/DeepSeek/Ollama) for auto-summarize and auto-embed.' },
-      memory: { title: 'Auto-Embed Memory', desc: 'Auto-generate embeddings via configured provider. Semantic search, dedup, TTL cleanup. No manual vector computation needed.' },
+      memory: { title: 'Auto-Embed Memory', desc: 'Auto-generate embeddings via configured provider. Hybrid Recall Pipeline: BM25+Vec dual-write, temporal decay, graph expansion, LLM rerank.' },
       token: { title: 'Smart Context & Token Count', desc: 'Smart context window with auto-summarize. Precise BPE token counting (tiktoken). Execution trace and RAG doc versioning.' },
       sessionsBar1: 'LLM Provider Config',
       sessionsBar2: 'Auto-Expiry',
@@ -579,7 +579,7 @@ export default {
     title: 'AI Memory Engine',
     titleSep: '/',
     titleSub: 'Data Flow Diagram',
-    desc: 'From user message to persistent memory: AiEngine coordinates KV, Time-Series, and Vector engines. Supports LLM Provider config, auto-embedding, auto-summarize, and smart context compression.',
+    desc: 'From user message to persistent memory: AiEngine coordinates KV, Time-Series, Vector, FTS, and Graph engines. v2.1 Hybrid Recall Pipeline: BM25+Vec+Temporal+Rerank+Graph full-stack retrieval.',
     exportPng: 'Export PNG',
     viewLogs: 'View Logs',
     engineCore: 'TALON AI ENGINE',
